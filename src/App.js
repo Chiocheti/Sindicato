@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 
-import Formulario from "./components/Formulario.js"
+import Formulario from "./components/pages/Formulario.js"
 
 function App() {
   return (

@@ -166,9 +166,16 @@ button[type="submit"]:hover {
     font: 16px;
 }
 
+.LicMed{
+    margin-top: 5px;
+    width: 25px;
+    height: 25px;
+    background-color:#e9e9e9;
+}
+
 .typeDate{
     font: 16px;
-    background-color: #fff;
+    background-color: #000;
     color: #b3a9a9;
     border-radius: 5px;
     vertical-align: middle;
@@ -187,4 +194,63 @@ button[type="submit"]:hover {
 .BttEndereco:Hover {
     opacity: 0.5;
     transition: .5s;
+}
+
+.BttMedico{
+    border-radius: 20px;
+    justify-content: center;
+    padding: 5px;
+    background-color: #000000;
+    color: #b3a9a9;
+    border:2px solid;
+    border-color: #FF0000;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.BttMedico:Hover {
+    opacity: 0.5;
+    transition: .5s;
+}
+
+.BttMedicoItem{
+    border-radius: 20px;
+    justify-content: center;
+    padding: 5px;
+    background-color: #000000;
+    color: #b3a9a9;
+    border:2px solid;
+    border-color: #FF0000;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.BttMedicoItem:Hover {
+    opacity: 0.5;
+    transition: .5s;
+}
+
+.BttDelete{
+    border-radius: 20px;
+    justify-content: center;
+    padding: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    border:2px solid;
+    border-color: #FF0000;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.BttDelete:Hover {
+    transition: .5s;
+    background-color: #e64949;
+    color: #ffffff
+}
+
+.divForm{
+    margin-top: 10px;
 }
