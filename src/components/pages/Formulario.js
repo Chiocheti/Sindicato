@@ -40,7 +40,7 @@ function Formulario() {
     const update = result => {
         console.log("Valor -> Pai")
         console.log(result)
-        
+
         var lista = dependentes
         var item = dependentes.find(i => i.Id == result)
         var index = dependentes.indexOf(item)
@@ -51,8 +51,8 @@ function Formulario() {
         console.log("index")
         console.log(index)
 
-        if(index > -1){
-            lista.splice(index,1)
+        if (index > -1) {
+            lista.splice(index, 1)
         }
 
         console.log("lista")
@@ -61,7 +61,7 @@ function Formulario() {
         load(lista)
     }
 
-    function load(lista){
+    function load(lista) {
         setDependentes(() => lista)
         console.log("dependentes")
         console.log(dependentes)
@@ -235,7 +235,18 @@ function Formulario() {
                     <input type="text" placeholder="Carteira de Trabalho" className="inputs required" />
                     <input type="text" placeholder="Orgão Emissor" className="inputs required" />
                 </div>
-
+                <div className="box-select">
+                    <input type="text" placeholder="Cel 01: " className="inputs required" />
+                    <input type="text" placeholder="Cel 02: " className="inputs required" />
+                    <input type="text" placeholder="Tel: " className="inputs required" />
+                </div>
+                <div className="box-select">
+                    <input type="text" placeholder="Empresa" className="inputs required" />
+                    <input id="cnpj" type="text" placeholder="Cnpj" className="inputs required" />
+                </div>
+                <div className="box-select">
+                    <input type="email" placeholder="Seu melhor E-Mail" className="inputs required" />
+                </div>
                 <div className="box-block">
                     <div className="box-block">
                         <p>Sexo:</p>
@@ -348,56 +359,41 @@ function Formulario() {
                         <input id="RgDependente" type="text" placeholder="Rg" className="inputs required" />
                     </div>
                 </div>
-                <div className="box-select">
-                    <p>Nascimento:</p>
-                    <input id="NascDependente" type="date" placeholder="Data de Nascimento" className="typeDate" />
-                    <p>Sexo:</p>
-                    <select id="SexoDependente" className="sexo" >
-                        <option value="none">Sexo</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
-                        <option value="Outro">Outro</option>
-                    </select>
-                    <p>Parentesco:</p>
-                    <select id="ParentescoDependente" className="sexo" >
-                        <option value="none">Parentesco</option>
-                        <option value="Pai">Pai</option>
-                        <option value="Mae">Mãe</option>
-                        <option value="Filho">Filho(a)</option>
-                    </select>
-                    <p>Possui Licença Medica:</p>
-                    <select id="LicencDependente" className="sexo" >
-                        <option value="false">Não</option>
-                        <option value="true">Sim</option>
-                    </select>
-
+                <div className="box-block">
+                    <div className="box-block">
+                        <p>Nascimento:</p>
+                        <input id="NascDependente" type="date" placeholder="Data de Nascimento" className="typeDate" />
+                    </div>
+                    <div className="box-block">
+                        <p>Sexo:</p>
+                        <select id="SexoDependente" className="sexo" >
+                            <option value="none">Sexo</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                    <div className="box-block">
+                        <p>Parentesco:</p>
+                        <select id="ParentescoDependente" className="sexo" >
+                            <option value="none">Parentesco</option>
+                            <option value="Pai">Pai</option>
+                            <option value="Mae">Mãe</option>
+                            <option value="Filho">Filho(a)</option>
+                        </select>
+                    </div>
+                    <div className="box-block">
+                        <p>Possui Licença Medica:</p>
+                        <select id="LicencDependente" className="sexo" >
+                            <option value="false">Não</option>
+                            <option value="true">Sim</option>
+                        </select>
+                    </div>
                 </div>
                 <input type="button" id="AddDependente" onClick={AddDependente} value="Adicionar Dependente" className="inputs required" />
-                <Card Dependentes={dependentes}handleResult={update}></Card>
+                <Card Dependentes={dependentes} handleResult={update}></Card>
                 <h3>-----------------------------------------------</h3>
-                <p>Contato</p>
-                <div className="box-select">
-                    <div>
-                        <input type="text" placeholder="Cel 01: " className="inputs required" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Cel 02: " className="inputs required" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Tel: " className="inputs required" />
-                    </div>
-                </div>
-                <div className="box-select">
-                    <div className="box-enterprise">
-                        <input type="text" placeholder="Empresa" className="inputs required" />
-                    </div>
-                    <div>
-                        <input id="cnpj" type="text" placeholder="Cnpj" className="inputs required" />
-                    </div>
-                </div>
-                <div>
-                    <input type="email" placeholder="Seu melhor E-Mail" className="inputs required" />
-                </div>
+
                 <textarea className="inputs" name="descricao" id="descricao" cols="25" rows="10"
                     placeholder="Informações sobre o cliente ..."></textarea>
                 <button type="submit">Enviar</button>
