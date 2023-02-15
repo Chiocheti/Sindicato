@@ -6,7 +6,7 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 function Formulario() {
 
-    var [useEndComercial, setUseEndComercial] = useState(false)
+    var [useEndereco02, setUseEndereco02] = useState(false)
     var [dependentes, setDependentes] = useState([])
     var [booLecMedc, setBooLecMedc] = useState(false)
     var [totalDependentes, setTotalDependentes] = useState(0)
@@ -18,13 +18,54 @@ function Formulario() {
     var [cidade, setCidade] = useState("")
     var [bairro, setBairro] = useState("")
 
+    var [cep02, setCep02] = useState("")
+    var [numero02, setNumero02] = useState("")
+    var [rua02, setRua02] = useState("")
+    var [estado02, setEstado02] = useState("")
+    var [cidade02, setCidade02] = useState("")
+    var [bairro02, setBairro02] = useState("")
 
     useEffect(() => {
-        document.getElementById("endereco01").style.display = "none"
-        document.getElementById("endereco02").style.display = "none"
-        document.getElementById("endereco03").style.display = "none"
-        document.getElementById("endereco04").style.display = "none"
+        if (useEndereco02 == false) {
+            document.getElementById("endereco01").style.display = "none"
+            document.getElementById("endereco02").style.display = "none"
+            document.getElementById("endereco03").style.display = "none"
+            document.getElementById("endereco04").style.display = "none"
+            document.getElementById("BttAddEndereco").value = "Adicionar Endereço"
+        } else {
+            document.getElementById("BttAddEndereco").value = "Remover Endereço"
+        }
     })
+
+    const update = result => {
+        console.log("Valor -> Pai")
+        console.log(result)
+        
+        var lista = dependentes
+        var item = dependentes.find(i => i.Id == result)
+        var index = dependentes.indexOf(item)
+
+        console.log("item")
+        console.log(item)
+
+        console.log("index")
+        console.log(index)
+
+        if(index > -1){
+            lista.splice(index,1)
+        }
+
+        console.log("lista")
+        console.log(lista)
+
+        load(lista)
+    }
+
+    function load(lista){
+        setDependentes(() => lista)
+        console.log("dependentes")
+        console.log(dependentes)
+    }
 
     function BuscaCEP() {
         var cep = document.getElementById('Cep').value
@@ -53,6 +94,33 @@ function Formulario() {
         })
     }
 
+    function BuscaCEP02() {
+        var cep = document.getElementById('Cep02').value
+        const options = {
+            method: 'GET',
+            url: `https://viacep.com.br/ws/${cep}/json/`
+        };
+
+        Axios.request(options).then(function (response) {
+            console.log(response.data)
+            var endereco = response.data
+            console.log("Endedeço: ")
+            console.log(endereco)
+            setCep02(cep)
+            setRua02(endereco.logradouro)
+            setBairro02(endereco.bairro)
+            setCidade02(endereco.localidade)
+            setEstado02(endereco.uf)
+            document.getElementById("Rua02").value = endereco.logradouro
+            document.getElementById("Bairro02").value = endereco.bairro
+            document.getElementById("Cidade02").value = endereco.localidade
+            document.getElementById("Estado02").value = endereco.uf
+
+        }).catch(function (error) {
+            console.log(error)
+        })
+    }
+
     function AddDependente() {
         var NomeDependente = document.getElementById("NomeDependente")
         var TelefoneDependente = document.getElementById("TelefoneDependente")
@@ -61,6 +129,7 @@ function Formulario() {
         var NascDependente = document.getElementById("NascDependente")
         var SexoDependente = document.getElementById("SexoDependente")
         var ParentescoDependente = document.getElementById("ParentescoDependente")
+        var LicencaDependente = document.getElementById("LicencDependente")
 
         var Array = new Object();
         Array.Id = totalDependentes
@@ -70,7 +139,7 @@ function Formulario() {
         Array.Rg = RgDependente.value
         Array.Nasc = NascDependente.value
         Array.Sexo = SexoDependente.value
-        Array.Licenca = booLecMedc
+        Array.Licenca = LicencaDependente.value
         Array.Parentesco = ParentescoDependente.value
 
         var List = dependentes;
@@ -92,17 +161,6 @@ function Formulario() {
         console.log(dependentes)
     }
 
-    function ChangeLicMedc() {
-        var Btt = document.getElementById("BttLicMedc")
-        if (booLecMedc == false) {
-            Btt.style.borderColor = "#00FF00"
-            setBooLecMedc(true)
-        } else {
-            Btt.style.borderColor = "#FF0000"
-            setBooLecMedc(false)
-        }
-    }
-
     function AddEndereco() {
         var container01 = document.getElementById("endereco01");
         var container02 = document.getElementById("endereco02");
@@ -114,15 +172,23 @@ function Formulario() {
             container02.style.display = "flex"
             container03.style.display = "flex"
             container04.style.display = "flex"
-            setUseEndComercial(true)
-            document.getElementById("AddEndereco").value = "Remover Endereço Comercial"
+            setUseEndereco02(true)
         } else {
             container01.style.display = "none"
             container02.style.display = "none"
             container03.style.display = "none"
             container04.style.display = "none"
-            setUseEndComercial(false)
-            document.getElementById("AddEndereco").value = "Adicionar Endereço Comercial"
+            setCep02("")
+            setRua02("")
+            setBairro02("")
+            setCidade02("")
+            setEstado02("")
+            document.getElementById("Cep02").value = ("")
+            document.getElementById("Rua02").value = ("")
+            document.getElementById("Bairro02").value = ("")
+            document.getElementById("Cidade02").value = ("")
+            document.getElementById("Estado02").value = ("")
+            setUseEndereco02(false)
         }
     }
 
@@ -147,20 +213,20 @@ function Formulario() {
                         <input type="text" placeholder="Cod. Sindicato" className="inputs required" />
                     </div>
                     <div className="box-select">
-                        <p className="date">
-                            Nascimento
+                        <p className="TituloCampo">
+                            Nascimento:
                         </p>
                         <input id="dateofbirth" type="date" placeholder="Data de Nascimento" className="typeDate" />
                     </div>
                     <div className="box-select">
-                        <p className="date">
-                            Admissão
+                        <p className="TituloCampo">
+                            Admissão:
                         </p>
                         <input id="hiringdate" type="date" placeholder="Data de Admissão" className="typeDate" />
                     </div>
                     <div className="box-select">
-                        <p className="date">
-                            Vencimento
+                        <p className="TituloCampo">
+                            Vencimento:
                         </p>
                         <input id="duedate" type="date" placeholder="Data de Vencimento" className="typeDate" />
                     </div>
@@ -234,6 +300,7 @@ function Formulario() {
                 </div>
                 <h3>-----------------------------------------------</h3>
                 <p>Endereço de Correspondencia</p>
+
                 <div className="box-select">
                     <input id="Cep" type="text" placeholder="CEP" className="inputs required" />
                     <input id="Numero" type="text" placeholder="Numero" className="inputs required" />
@@ -248,22 +315,23 @@ function Formulario() {
                     <input id="Bairro" type="text" placeholder="Bairro" className="inputs required" />
                 </div>
 
-                <p id="endereco04">Endereço Comercial</p>
+                <p id="endereco04">Endereço Numero 02</p>
+
                 <div id="endereco01" className="box-select">
-                    <input type="text" placeholder="CEP" className="inputs required" />
-                    <input type="text" placeholder="Numero" className="inputs required" />
-                    <input type="button" value="Buscar Endereço" className="BttEndereco" />
+                    <input id="Cep02" type="text" placeholder="CEP" className="inputs required" />
+                    <input id="Numero02" type="text" placeholder="Numero" className="inputs required" />
+                    <input type="button" value="Buscar Endereço" className="BttEndereco" onClick={BuscaCEP02} />
                 </div>
                 <div id="endereco02" className="box-name">
-                    <input type="text" placeholder="Rua" className="inputs required" />
+                    <input id="Rua02" type="text" placeholder="Rua" className="inputs required" />
                 </div>
                 <div id="endereco03" className="box-select">
-                    <input type="text" placeholder="Estado" className="inputs required" />
-                    <input type="text" placeholder="Cidade" className="inputs required" />
-                    <input type="text" placeholder="Bairro" className="inputs required" />
+                    <input id="Estado02" type="text" placeholder="Estado" className="inputs required" />
+                    <input id="Cidade02" type="text" placeholder="Cidade" className="inputs required" />
+                    <input id="Bairro02" type="text" placeholder="Bairro" className="inputs required" />
                 </div>
 
-                <input type="button" id="AddEndereco" onClick={AddEndereco} value="Adicionar Endereço Comercial" className="BttEndereco" />
+                <input type="button" id="BttAddEndereco" onClick={AddEndereco} value="" className="BttEndereco" />
                 <h3>-----------------------------------------------</h3>
                 <p>Dependentes</p>
                 <div className="box-select">
@@ -281,26 +349,31 @@ function Formulario() {
                     </div>
                 </div>
                 <div className="box-select">
-                    <p className="date">
-                        Nascimento
-                    </p>
-                    <input id="NascDependente" type="date" placeholder="Data de Admissão" className="typeDate" />
+                    <p>Nascimento:</p>
+                    <input id="NascDependente" type="date" placeholder="Data de Nascimento" className="typeDate" />
+                    <p>Sexo:</p>
                     <select id="SexoDependente" className="sexo" >
                         <option value="none">Sexo</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
                         <option value="Outro">Outro</option>
                     </select>
+                    <p>Parentesco:</p>
                     <select id="ParentescoDependente" className="sexo" >
                         <option value="none">Parentesco</option>
                         <option value="Pai">Pai</option>
                         <option value="Mae">Mãe</option>
                         <option value="Filho">Filho(a)</option>
                     </select>
-                    <input id="BttLicMedc" type="button" value="Possui Licença Medica" className="BttMedico" onClick={ChangeLicMedc} />
-                    <input type="button" id="AddDependente" onClick={AddDependente} value="Adicionar Dependente" className="inputs required" />
+                    <p>Possui Licença Medica:</p>
+                    <select id="LicencDependente" className="sexo" >
+                        <option value="false">Não</option>
+                        <option value="true">Sim</option>
+                    </select>
+
                 </div>
-                <Card Dependentes={dependentes}></Card>
+                <input type="button" id="AddDependente" onClick={AddDependente} value="Adicionar Dependente" className="inputs required" />
+                <Card Dependentes={dependentes}handleResult={update}></Card>
                 <h3>-----------------------------------------------</h3>
                 <p>Contato</p>
                 <div className="box-select">

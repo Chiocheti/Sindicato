@@ -189,6 +189,7 @@ button[type="submit"]:hover {
     padding: 5px;
     background-color: #000000;
     color: #b3a9a9;
+    width: 100%;
 }
 
 .BttEndereco:Hover {
@@ -253,4 +254,19 @@ button[type="submit"]:hover {
 
 .divForm{
     margin-top: 10px;
+}
+
+.TituloCampo{
+    margin-top: 8px;
+}
+
+.Second{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.purple{
+    background-color: #9264b7;
+    padding: 15px;
+    border-radius: 10px;
 }

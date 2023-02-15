@@ -1,51 +1,51 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
-function ItemDependente({ dependente }) {
+function ItemDependente({ dependente, handleResult }) {
 
-    useEffect(() => {
-        var Btt = document.getElementById("BttLicMedc")
-        if(dependente.Licenca == "true"){
-            Btt.style.borderColor = "#00FF00"
-        }else{
-            Btt.style.borderColor = "#FF0000"
-        }
-        
-    })
-
-    console.log("Dependente ++++++++++++")
+    console.log("Item")
     console.log(dependente)
 
+    function deleteDependente() {
+        handleResult(dependente.Id)
+    }
+
     return (
-        <div>
+        <div className="purple">
             <div className="box-select">
                 <div >
-                    <input id="name" type="text" className="inputs required" value={dependente.Nome} readOnly />
+                    <input id="name" type="text" className="inputs required" value={`Nome: ${dependente.Nome}`} readOnly />
                 </div>
                 <div>
-                    <input id="telefone" type="text" className="inputs required" value={dependente.Telefone} readOnly />
+                    <input id="telefone" type="text" className="inputs required" value={`Telefone: ${dependente.Telefone}`} readOnly />
                 </div>
                 <div>
-                    <input id="cpf" type="text" className="inputs required" value={dependente.Cpf} readOnly />
+                    <input id="cpf" type="text" className="inputs required" value={`Cpf: ${dependente.Cpf}`} readOnly />
                 </div>
                 <div>
-                    <input id="rg" type="text" className="inputs required" value={dependente.Rg} readOnly />
+                    <input id="rg" type="text" className="inputs required" value={`Rg: ${dependente.Rg}`} readOnly />
                 </div>
             </div>
-            <div className="box-select">
-                <div>
-                    <input id="Nasc" type="text" value={dependente.Nasc} className="inputs required" readOnly />
-                </div>
-                <div>
-                    <input id="sexo" type="text" value={dependente.Sexo} className="inputs required" readOnly />
-                </div>
-                <div>
-                    <input id="parentesco" type="text" value={dependente.Parentesco} className="inputs required" readOnly />
-                </div>
-                <div>
-                <input id="BttLicMedc" type="text" value="Possui Licença Medica" className="BttMedicoItem" readOnly />
-                <input id="BttLicMedc" type="text" value="Delete" className="BttDelete" readOnly />
+            <div className="Second">
+                <div className="box-block">
+                    <p className="TituloCampo">Nascimento:</p>
+                    <div>
+                        <input id="Nasc" type="text" value={dependente.Nasc} className="inputs required" readOnly />
+                    </div>
+                    <p className="TituloCampo">Sexo:</p>
+                    <div>
+                        <input id="sexo" type="text" value={dependente.Sexo} className="inputs required" readOnly />
+                    </div>
+                    <p className="TituloCampo">Parentesco:</p>
+                    <div>
+                        <input id="parentesco" type="text" value={dependente.Parentesco} className="inputs required" readOnly />
+                    </div>
+                    <p className="TituloCampo">Lic. Medica:</p>
+                    <div>
+                        <input id="licenca" type="text" value={dependente.Licenca == "true" ? "Sim" : "Não"} className="inputs required" readOnly />
+                    </div>
                 </div>
             </div>
+            <input type="button" id="AddDependente" value="Remover Dependente" className="inputs required" onClick={deleteDependente} />
         </div>
     )
 }

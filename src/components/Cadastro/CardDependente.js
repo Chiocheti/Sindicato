@@ -1,12 +1,25 @@
 import Item from "./ItemDependente"
 import "./../../css/StyleFormulario.css"
+import { useState } from "react"
 
-function CardDependente({Dependentes}) {
+function CardDependente({ Dependentes, handleResult }) {
+
+    var [recharg, setRecharg] = useState("")
+
+    const update = result => {
+        console.log("Valor -> Card")
+        setRecharg(result)
+        console.log(result)
+        handleResult(result)
+    }
+
     return (
         <div>
             {
                 Dependentes.map((dependente) => (
-                    <Item key={dependente.Id} dependente={dependente}/>
+                    <div className="Second">
+                        <Item dependente={dependente} handleResult={update}/>
+                    </div>
                 ))
             }
         </div>
