@@ -26,7 +26,7 @@ body {
     justify-content: center;
     /* alinhamento da div principal */
     align-items: center;
-    margin-top: 20px;
+    margin-top: 100px;
     /* margem da div principal com o topo */
 }
 
@@ -149,13 +149,13 @@ button[type="submit"]:hover {
     }
 }
 
-.sexo{
+.sexo {
     background-color: #000000;
     color: #b3a9a9;
     border-radius: 5px;
 }
 
-.date{
+.date {
     background-color: #000000;
     color: #b3a9a9;
     border-radius: 5px;
@@ -166,14 +166,14 @@ button[type="submit"]:hover {
     font: 16px;
 }
 
-.LicMed{
+.LicMed {
     margin-top: 5px;
     width: 25px;
     height: 25px;
-    background-color:#e9e9e9;
+    background-color: #e9e9e9;
 }
 
-.typeDate{
+.typeDate {
     font: 16px;
     background-color: #000;
     color: #b3a9a9;
@@ -183,7 +183,7 @@ button[type="submit"]:hover {
     font-family: 'Trebuchet MS', Arial, sans-serif;
 }
 
-.BttEndereco{
+.BttEndereco {
     border-radius: 20px;
     justify-content: center;
     padding: 5px;
@@ -197,13 +197,13 @@ button[type="submit"]:hover {
     transition: .5s;
 }
 
-.BttMedico{
+.BttMedico {
     border-radius: 20px;
     justify-content: center;
     padding: 5px;
     background-color: #000000;
     color: #b3a9a9;
-    border:2px solid;
+    border: 2px solid;
     border-color: #FF0000;
     text-align: center;
     justify-content: center;
@@ -215,13 +215,13 @@ button[type="submit"]:hover {
     transition: .5s;
 }
 
-.BttMedicoItem{
+.BttMedicoItem {
     border-radius: 20px;
     justify-content: center;
     padding: 5px;
     background-color: #000000;
     color: #b3a9a9;
-    border:2px solid;
+    border: 2px solid;
     border-color: #FF0000;
     text-align: center;
     justify-content: center;
@@ -233,13 +233,13 @@ button[type="submit"]:hover {
     transition: .5s;
 }
 
-.BttDelete{
+.BttDelete {
     border-radius: 20px;
     justify-content: center;
     padding: 5px;
     background-color: #000000;
     color: #ffffff;
-    border:2px solid;
+    border: 2px solid;
     border-color: #FF0000;
     text-align: center;
     justify-content: center;
@@ -252,21 +252,67 @@ button[type="submit"]:hover {
     color: #ffffff
 }
 
-.divForm{
+.divForm {
     margin-top: 10px;
 }
 
-.TituloCampo{
+.TituloCampo {
     margin-top: 8px;
 }
 
-.Second{
+.Second {
     margin-top: 1em;
     margin-bottom: 1em;
 }
 
-.purple{
+.purple {
     background-color: #9264b7;
     padding: 15px;
     border-radius: 10px;
+}
+
+.Navbar {
+    vertical-align: middle;
+    justify-content: center;
+    background-color: #9264b7;
+    align-items: center;
+    justify-content: stretch;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.NavbarContent {
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;   
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.Flex{
+    display: flex;
+}
+
+.Save{
+    padding: 1rem;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #7a5499;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: .5s
+}
+
+.Save:hover{
+    background-color: var(--color-purple1);
 }
