@@ -1,10 +1,13 @@
 import "../../css/StyleFormulario.css"
 import Card from "../Cadastro/CardDependente.js"
 
+import { useNavigate } from 'react-router-dom'
 import Axios from "axios";
 
 import { useState, useEffect } from "react";
 function Formulario() {
+
+    var [usuario, setUsuario] = useState("")
 
     var [useEndereco02, setUseEndereco02] = useState(false)
     var [dependentes, setDependentes] = useState([])
@@ -35,7 +38,30 @@ function Formulario() {
         } else {
             document.getElementById("BttAddEndereco").value = "Remover Endereço"
         }
+
+        var user = JSON.parse(sessionStorage.getItem("usuario"))
+        console.log("User")
+        console.log(user)
+        if (user == "" || user == null || user == undefined) {
+            navigate("/")
+            sessionStorage.removeItem("usuario")
+            localStorage.removeItem("usuario")
+        } else {
+            const options = {
+                method: 'GET',
+                url: `http://localhost:3001/api/usuario/loginSenha/${user.loginUsuario}/${user.senhaUsuario}`
+            };
+
+            Axios.request(options).then(function (response) {
+                console.log("Achou")
+                document.getElementById("nomeUsuario").value = `Nome Usuario: ${user.nomeUsuario}`
+            }).catch(function (error) {
+                navigate("/")
+            });
+        }
     })
+
+    const navigate = useNavigate();
 
     const update = result => {
         console.log("Valor -> Pai")
@@ -58,13 +84,19 @@ function Formulario() {
         console.log("lista")
         console.log(lista)
 
-        load(lista)
+        Load(lista)
     }
 
-    function load(lista) {
+    function Load(lista) {
         setDependentes(() => lista)
         console.log("dependentes")
         console.log(dependentes)
+    }
+
+    function LogOut() {
+        localStorage.removeItem("usuario")
+        sessionStorage.removeItem("usuario")
+        navigate("/")
     }
 
     function BuscaCEP() {
@@ -197,10 +229,11 @@ function Formulario() {
         <div>
             <div className="Navbar">
                 <div className="NavbarContent">
-                    <h1> Nome do Usuario:  </h1>
+                    <input type="text" name="" id="nomeUsuario" value={""} readOnly className="UserName"/>
+
                     <div className="Flex">
                         <input type="button" className="Save" value="Salvar" />
-
+                        <input type="button" className="Save" value="Deslogar" onClick={LogOut} />
                     </div>
                 </div>
             </div>
