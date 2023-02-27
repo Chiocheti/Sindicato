@@ -98,6 +98,7 @@ function AdminPage() {
                                 loginUsuario.value = ""
                                 senhaUsuario.value = ""
                                 repeteSenha.value = ""
+                                telefoneUsuario = ""
                             }).catch(function (error) {
                                 console.error(error);
                             });

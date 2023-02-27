@@ -88,6 +88,7 @@ h1 {
     display: flex;
     justify-items: normal;
     gap: 0.5rem;
+    align-items: center;
 }
 
 .box-block {
@@ -149,10 +150,13 @@ button[type="submit"]:hover {
     }
 }
 
-.sexo {
+.select {
     background-color: #000000;
     color: #b3a9a9;
     border-radius: 5px;
+    width: 100%;
+    margin-right: 5px;
+    height: 35px;
 }
 
 .date {
@@ -179,8 +183,10 @@ button[type="submit"]:hover {
     color: #b3a9a9;
     border-radius: 5px;
     vertical-align: middle;
-    width: 110px;
+    width: 100%;
+    height: 30px;
     font-family: 'Trebuchet MS', Arial, sans-serif;
+    text-align: center;
 }
 
 .BttEndereco {
@@ -256,10 +262,6 @@ button[type="submit"]:hover {
     margin-top: 10px;
 }
 
-.TituloCampo {
-    margin-top: 8px;
-}
-
 .Second {
     margin-top: 1em;
     margin-bottom: 1em;
@@ -292,16 +294,16 @@ button[type="submit"]:hover {
     justify-content: space-between;
     width: 100%;
     max-width: 1200px;
-    margin: auto;   
+    margin: auto;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
-.Flex{
+.Flex {
     display: flex;
 }
 
-.Save{
+.Save {
     margin-right: 10px;
     padding: 1rem;
     font-size: 1rem;
@@ -314,11 +316,11 @@ button[type="submit"]:hover {
     transition: .5s
 }
 
-.Save:hover{
+.Save:hover {
     background-color: var(--color-purple1);
 }
 
-.UserName{
+.UserName {
     width: 100%;
     margin-left: 10px;
     margin-right: 10px;
@@ -333,6 +335,28 @@ button[type="submit"]:hover {
     transition: .5s
 }
 
-.UserName:hover{
+.UserName:hover {
     background-color: var(--color-purple1);
+}
+
+.TituloCampo {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-items: normal;
+    align-items: center;
+}
+
+.TituloCampoX1 {
+    margin-left: 5px;
+    flex: 1;
+}
+
+.TituloCampoX2 {
+    margin-left: 5px;
+    flex: 2;
+}
+
+.TituloCampoX3 {
+    margin-left: 5px;
+    flex: 3;
 }

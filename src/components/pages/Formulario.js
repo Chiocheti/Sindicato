@@ -1,5 +1,6 @@
 import "../../css/StyleFormulario.css"
-import Card from "../Cadastro/CardDependente.js"
+import CardDependente from "../Cadastro/CardDependente.js"
+import CardEmprego from "../Cadastro/CardEmpresa.js"
 
 import { useNavigate } from 'react-router-dom'
 import Axios from "axios";
@@ -10,9 +11,14 @@ function Formulario() {
     var [usuario, setUsuario] = useState("")
 
     var [useEndereco02, setUseEndereco02] = useState(false)
+
     var [dependentes, setDependentes] = useState([])
-    var [booLecMedc, setBooLecMedc] = useState(false)
     var [totalDependentes, setTotalDependentes] = useState(0)
+
+    var [empregos, setEmpregos] = useState([])
+    var [totalEmpregos, setTotalEmpregos] = useState(0)
+
+    var [booLecMedc, setBooLecMedc] = useState(false)
 
     var [cep, setCep] = useState("")
     var [numero, setNumero] = useState("")
@@ -91,6 +97,36 @@ function Formulario() {
         setDependentes(() => lista)
         console.log("dependentes")
         console.log(dependentes)
+    }
+
+    const updateEmpregos = result => {
+        console.log("Valor -> Pai")
+        console.log(result)
+
+        var lista = empregos
+        var item = empregos.find(i => i.Id == result)
+        var index = empregos.indexOf(item)
+
+        console.log("item")
+        console.log(item)
+
+        console.log("index")
+        console.log(index)
+
+        if (index > -1) {
+            lista.splice(index, 1)
+        }
+
+        console.log("lista")
+        console.log(lista)
+
+        LoadEmpregos(lista)
+    }
+
+    function LoadEmpregos(lista) {
+        setEmpregos(() => lista)
+        console.log("empregos")
+        console.log(empregos)
     }
 
     function LogOut() {
@@ -224,23 +260,67 @@ function Formulario() {
         }
     }
 
+    function AddEmprego() {
+        var empresa = document.getElementById("Empresa")
+        var codEmpresa = document.getElementById("CodEmpresa")
+        var admissao = document.getElementById("Admissao")
+        var demissao = document.getElementById("Demissão")
+        var contribuinte = document.getElementById("Contribuinte")
+
+        var Array = new Object();
+        Array.Id = totalEmpregos
+        Array.Empresa = empresa.value
+        Array.CodEmpresa = codEmpresa.value
+        Array.Admissao = admissao.value
+        Array.Demissao = demissao.value
+        Array.Contribuinte = contribuinte.value
+
+        var List = empregos
+        List.push(Array)
+        setEmpregos(List)
+
+        empresa.value = ""
+        codEmpresa.value = ""
+        admissao.value = ""
+        demissao.value = ""
+
+        setTotalEmpregos(totalEmpregos + 1)
+
+        
+    }
+
     return (
 
         <div>
             <div className="Navbar">
+
                 <div className="NavbarContent">
-                    <input type="text" name="" id="nomeUsuario" value={""} readOnly className="UserName"/>
+                    <input type="text" name="" id="nomeUsuario" value={""} readOnly className="UserName" />
 
                     <div className="Flex">
                         <input type="button" className="Save" value="Salvar" />
                         <input type="button" className="Save" value="Deslogar" onClick={LogOut} />
                     </div>
+
                 </div>
             </div>
             <div className="content">
+
                 <h1>Cadastro</h1>
+
                 <form id="form">
-                    <p>Informações Pessoais</p>
+                    <h2>Informações Pessoais</h2>
+                    <div className="TituloCampo">
+                        <div className="TituloCampoX3">
+                            <p>Nome Completo</p>
+                        </div>
+                        <div className="TituloCampoX1">
+                            <p>Cpf</p>
+                        </div>
+                        <div className="TituloCampoX1">
+                            <p>Orgão Emissor</p>
+                        </div>
+                    </div>
                     <div className="box-select">
                         <div className="box-name">
                             <input id="name" type="text" placeholder="Nome Completo" className="inputs required" />
@@ -249,64 +329,112 @@ function Formulario() {
                             <input id="cpf" type="text" placeholder="Cpf" className="inputs required" />
                         </div>
                         <div>
-                            <input id="rg" type="text" placeholder="Rg" className="inputs required" />
+                            <input id="rg" type="text" placeholder="Orgão Emissor" className="inputs required" />
                         </div>
                     </div>
+                    <div className="TituloCampo">
+
+                        <div className="TituloCampoX1">
+                            <p>Cod Sindicato</p>
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <p>Nascimento:</p>
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <p>Admissao:</p>
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <p>Vencimento:</p>
+                        </div>
+
+                    </div>
                     <div className="box-select">
+
                         <div className="box-date">
                             <input type="text" placeholder="Cod. Sindicato" className="inputs required" />
                         </div>
+
                         <div className="box-select">
-                            <p className="TituloCampo">
-                                Nascimento:
-                            </p>
                             <input id="dateofbirth" type="date" placeholder="Data de Nascimento" className="typeDate" />
                         </div>
+
                         <div className="box-select">
-                            <p className="TituloCampo">
-                                Admissão:
-                            </p>
                             <input id="hiringdate" type="date" placeholder="Data de Admissão" className="typeDate" />
                         </div>
+
                         <div className="box-select">
-                            <p className="TituloCampo">
-                                Vencimento:
-                            </p>
                             <input id="duedate" type="date" placeholder="Data de Vencimento" className="typeDate" />
                         </div>
+
                     </div>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Carteira de Trabalho</p>
+                        <p className="TituloCampoX1">Rg</p>
+                    </div>
+
                     <div className="box-select">
                         <input type="text" placeholder="Carteira de Trabalho" className="inputs required" />
-                        <input type="text" placeholder="Orgão Emissor" className="inputs required" />
+                        <input type="text" placeholder="Rg" className="inputs required" />
                     </div>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Cel 01</p>
+                        <p className="TituloCampoX1">Cel 02</p>
+                        <p className="TituloCampoX1">Tel</p>
+                    </div>
+
                     <div className="box-select">
                         <input type="text" placeholder="Cel 01: " className="inputs required" />
                         <input type="text" placeholder="Cel 02: " className="inputs required" />
                         <input type="text" placeholder="Tel: " className="inputs required" />
                     </div>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Empresa</p>
+                        <p className="TituloCampoX1">Cnpj</p>
+                    </div>
+
                     <div className="box-select">
                         <input type="text" placeholder="Empresa" className="inputs required" />
                         <input id="cnpj" type="text" placeholder="Cnpj" className="inputs required" />
                     </div>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Email</p>
+                    </div>
+
                     <div className="box-select">
                         <input type="email" placeholder="Seu melhor E-Mail" className="inputs required" />
                     </div>
-                    <div className="box-block">
-                        <div className="box-block">
-                            <p>Sexo:</p>
-                            <select id="sexo" className="sexo" >
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Sexo</p>
+                        <p className="TituloCampoX1">Instrução</p>
+                        <p className="TituloCampoX1">Tipo</p>
+                        <p className="TituloCampoX1">Situação</p>
+                        <p className="TituloCampoX1">Estado Civil</p>
+                        <p className="TituloCampoX1">Enviar Jornal</p>
+                        <p className="TituloCampoX1">Deficiencia</p>
+                    </div>
+
+                    <div className="TituloCampo">
+                        <div className="TituloCampoX1">
+                            <select id="" className="select" >
                                 <option value="none">Sexo</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Feminino">Feminino</option>
-
                             </select>
                         </div>
-                        <div className="box-block">
-                            <p>Instrução:</p>
-                            <select id="sexo" className="sexo" >
+
+                        <div className="TituloCampoX1">
+                            <select id="" className="select" >
                                 <option value="none">Instrução</option>
                                 <option value="NaoAlfabetizado">Não Alfabetizado</option>
-                                <option value="Fundamental">Ensino Fundamental</option>
+                                <option value="Fundamental">Fundamental</option>
                                 <option value="Medio">Ensino Medio</option>
                                 <option value="Superior">Superior</option>
                                 <option value="Pos">Pós Graduado</option>
@@ -314,20 +442,16 @@ function Formulario() {
                                 <option value="Doutor">Doutor</option>
                             </select>
                         </div>
-                        <div className="box-block">
-                            <p>Tipo:</p>
-                            <select id="tipo" className="sexo" >
-                                <option value="none">Tipo</option>
-                                <option value="Fornecedor">Fornecedor</option>
-                                <option value="Geral">Geral</option>
-                                <option value="Medico">Médico</option>
-                                <option value="NaoAssociado">Não Associado</option>
-                                <option value="Prestador">Prestador de Serviço</option>
+
+                        <div className="TituloCampoX1">
+                            <select id="tipo" className="select" >
+                                <option value="true">Associado</option>
+                                <option value="false">Não Associado</option>
                             </select>
                         </div>
-                        <div className="box-block">
-                            <p>Situação:</p>
-                            <select id="Situacao" className="sexo" >
+
+                        <div className="TituloCampoX1">
+                            <select id="Situacao" className="select" >
                                 <option value="none">Situacao</option>
                                 <option value="Ativo">Ativo</option>
                                 <option value="Aposentado">Aposentado</option>
@@ -338,9 +462,9 @@ function Formulario() {
                                 <option value="Não Informado">Não Informado</option>
                             </select>
                         </div>
-                        <div className="box-block">
-                            <p>Estado Civil:</p>
-                            <select id="EstadoCivil" className="sexo" >
+
+                        <div className="TituloCampoX1">
+                            <select id="EstadoCivil" className="select" >
                                 <option value="none">Estado Civil</option>
                                 <option value="Solteiro">Solteiro</option>
                                 <option value="Casado">Casado</option>
@@ -352,9 +476,23 @@ function Formulario() {
                                 <option value="NA">NA</option>
                             </select>
                         </div>
+
+                        <div className="TituloCampoX1">
+                            <select id="Jornal" className="select" >
+                                <option value="true">Enviar</option>
+                                <option value="false">Não Enviar</option>
+                            </select>
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <select id="Jornal" className="select" >
+                                <option value="false">Não Possui</option>
+                                <option value="true">Possui</option>
+                            </select>
+                        </div>
                     </div>
-                    <h3>-----------------------------------------------</h3>
-                    <p>Endereço de Correspondencia</p>
+
+                    <h2>Endereço de Correspondencia</h2>
 
                     <div className="box-select">
                         <input id="Cep" type="text" placeholder="CEP" className="inputs required" />
@@ -387,62 +525,133 @@ function Formulario() {
                     </div>
 
                     <input type="button" id="BttAddEndereco" onClick={AddEndereco} value="" className="BttEndereco" />
-                    <h3>-----------------------------------------------</h3>
-                    <p>Dependentes</p>
+
+                    <h2>Dependentes</h2>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Nome Completo</p>
+                        <p className="TituloCampoX1">Cel</p>
+                        <p className="TituloCampoX1">Cpf</p>
+                        <p className="TituloCampoX1">Rg</p>
+                    </div>
+
                     <div className="box-select">
+
                         <div>
-                            <input id="NomeDependente" type="text" placeholder="Nome Completo do Dependente: " className="inputs required" />
+                            <input id="NomeDependente" type="text" placeholder="Nome Completo: " className="inputs required" />
                         </div>
+
                         <div>
                             <input id="TelefoneDependente" type="text" placeholder="Cel: " className="inputs required" />
                         </div>
+
                         <div>
                             <input id="CpfDependente" type="text" placeholder="Cpf" className="inputs required" />
                         </div>
+
                         <div>
                             <input id="RgDependente" type="text" placeholder="Rg" className="inputs required" />
                         </div>
+
                     </div>
-                    <div className="box-block">
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Nascimento</p>
+                        <p className="TituloCampoX1">Sexo</p>
+                        <p className="TituloCampoX1">Parentesco</p>
+                        <p className="TituloCampoX1">Possui Licença Medica</p>
+                    </div>
+
+                    <div className="box-select">
+
                         <div className="box-block">
-                            <p>Nascimento:</p>
+
                             <input id="NascDependente" type="date" placeholder="Data de Nascimento" className="typeDate" />
                         </div>
+
                         <div className="box-block">
-                            <p>Sexo:</p>
-                            <select id="SexoDependente" className="sexo" >
+
+                            <select id="SexoDependente" className="select" >
                                 <option value="none">Sexo</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Feminino">Feminino</option>
                                 <option value="Outro">Outro</option>
                             </select>
                         </div>
+
                         <div className="box-block">
-                            <p>Parentesco:</p>
-                            <select id="ParentescoDependente" className="sexo" >
+
+                            <select id="ParentescoDependente" className="select" >
                                 <option value="none">Parentesco</option>
                                 <option value="Pai">Pai</option>
                                 <option value="Mae">Mãe</option>
                                 <option value="Filho">Filho(a)</option>
                             </select>
                         </div>
+
                         <div className="box-block">
-                            <p>Possui Licença Medica:</p>
-                            <select id="LicencDependente" className="sexo" >
+
+                            <select id="LicencDependente" className="select" >
+                                <option value="false">Não</option>
+                                <option value="true">Sim</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <input type="button" id="AddDependente" onClick={AddDependente} value="Adicionar Dependente" className="inputs required" />
+                    <CardDependente Dependentes={dependentes} handleResult={update}></CardDependente>
+                    <h2>Detalhes do Cliente</h2>
+
+                    <textarea className="inputs" name="descricao" id="descricao" cols="25" rows="10"
+                        placeholder="Informações sobre o cliente ...">
+                    </textarea>
+
+                    <h2>Empregos</h2>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Empresa</p>
+                    </div>
+
+                    <div className="TituloCampoX3">
+                        <input id="Empresa" type="text" placeholder="Empresa" className="inputs required" />
+                    </div>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Cod. Empresa</p>
+                        <p className="TituloCampoX1">Admissão</p>
+                        <p className="TituloCampoX1">Demissão</p>
+                        <p className="TituloCampoX1">Contribuinte</p>
+                    </div>
+
+                    <div className="TituloCampo">
+
+                        <div className="TituloCampoX1">
+                            <input id="CodEmpresa" type="text" placeholder="Cod. Empresa" className="inputs required" />
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <input id="Admissao" type="date" placeholder="Data de Admissão" className="typeDate" />
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <input id="Demissão" type="date" placeholder="Data de Demissão" className="typeDate" />
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <select id="Contribuinte" className="select" >
                                 <option value="false">Não</option>
                                 <option value="true">Sim</option>
                             </select>
                         </div>
-                    </div>
-                    <input type="button" id="AddDependente" onClick={AddDependente} value="Adicionar Dependente" className="inputs required" />
-                    <Card Dependentes={dependentes} handleResult={update}></Card>
-                    <h3>-----------------------------------------------</h3>
 
-                    <textarea className="inputs" name="descricao" id="descricao" cols="25" rows="10"
-                        placeholder="Informações sobre o cliente ..."></textarea>
+                    </div>
+
+                    <input type="button" id="AddEmprego" onClick={AddEmprego} value="Adicionar Emprego" className="inputs required" />
+                    <CardEmprego Empregos={empregos} handleResult={updateEmpregos}></CardEmprego>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 
