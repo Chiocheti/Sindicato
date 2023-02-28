@@ -89,6 +89,7 @@ h1 {
     justify-items: normal;
     gap: 0.5rem;
     align-items: center;
+    
 }
 
 .box-block {
@@ -97,21 +98,19 @@ h1 {
     gap: 1rem;
 }
 
-.box-select>div {
-    display: flex;
+.box-select>div.box-x1 {
     flex: 1;
+    width: 100%;
 }
 
-.box-select>div.box-name {
+.box-select>div.box-x2 {
+    flex: 2;
+    width: 100%;
+}
+
+.box-select>div.box-x3 {
     flex: 3;
-}
-
-.box-select>div.box-date {
-    flex: 1;
-}
-
-.box-select>div.box-enterprise {
-    flex: 1.5;
+    width: 100%;
 }
 
 /* .box-select > div:nth-child(1){
