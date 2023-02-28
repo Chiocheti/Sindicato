@@ -10,9 +10,13 @@ function ItemEmpresa({ emprego, handleResult }) {
     return (
         <div className="purple">
 
-
-            <div className="TituloCampoX3">
-                <input id="Empresa" type="text" value={`Empresa: ${emprego.Empresa}`} className="inputs required" readOnly />
+            <div className="TituloCampo">
+                <div className="TituloCampoX3">
+                    <input id="Empresa" type="text" value={`Empresa: ${emprego.Empresa}`} className="inputs required" readOnly />
+                </div>
+                <div className="TituloCampoX1">
+                    <input id="Cnpj" type="text" value={`Cnpj: ${emprego.Cnpj}`} className="inputs required" readOnly />
+                </div>
             </div>
             <br />
             <div className="TituloCampo">

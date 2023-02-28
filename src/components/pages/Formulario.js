@@ -266,6 +266,7 @@ function Formulario() {
         var admissao = document.getElementById("Admissao")
         var demissao = document.getElementById("Demissão")
         var contribuinte = document.getElementById("Contribuinte")
+        var cnpj = document.getElementById("Cnpj")
 
         var Array = new Object();
         Array.Id = totalEmpregos
@@ -274,6 +275,7 @@ function Formulario() {
         Array.Admissao = admissao.value
         Array.Demissao = demissao.value
         Array.Contribuinte = contribuinte.value
+        Array.Cnpj = cnpj.value
 
         var List = empregos
         List.push(Array)
@@ -283,10 +285,9 @@ function Formulario() {
         codEmpresa.value = ""
         admissao.value = ""
         demissao.value = ""
+        cnpj.value = ""
 
         setTotalEmpregos(totalEmpregos + 1)
-
-        
     }
 
     return (
@@ -318,7 +319,7 @@ function Formulario() {
                             <p>Cpf</p>
                         </div>
                         <div className="TituloCampoX1">
-                            <p>Orgão Emissor</p>
+                            <p>Cart. Trabalho</p>
                         </div>
                     </div>
                     <div className="box-select">
@@ -329,7 +330,7 @@ function Formulario() {
                             <input id="cpf" type="text" placeholder="Cpf" className="inputs required" />
                         </div>
                         <div>
-                            <input id="rg" type="text" placeholder="Orgão Emissor" className="inputs required" />
+                            <input id="carteira" type="text" placeholder="Cart. Trbalho" className="inputs required" />
                         </div>
                     </div>
                     <div className="TituloCampo">
@@ -372,13 +373,13 @@ function Formulario() {
                     </div>
 
                     <div className="TituloCampo">
-                        <p className="TituloCampoX1">Carteira de Trabalho</p>
                         <p className="TituloCampoX1">Rg</p>
+                        <p className="TituloCampoX1">Orgão Emissor</p>
                     </div>
 
                     <div className="box-select">
-                        <input type="text" placeholder="Carteira de Trabalho" className="inputs required" />
                         <input type="text" placeholder="Rg" className="inputs required" />
+                        <input type="text" placeholder="Orgão Emissor" className="inputs required" />
                     </div>
 
                     <div className="TituloCampo">
@@ -391,16 +392,6 @@ function Formulario() {
                         <input type="text" placeholder="Cel 01: " className="inputs required" />
                         <input type="text" placeholder="Cel 02: " className="inputs required" />
                         <input type="text" placeholder="Tel: " className="inputs required" />
-                    </div>
-
-                    <div className="TituloCampo">
-                        <p className="TituloCampoX1">Empresa</p>
-                        <p className="TituloCampoX1">Cnpj</p>
-                    </div>
-
-                    <div className="box-select">
-                        <input type="text" placeholder="Empresa" className="inputs required" />
-                        <input id="cnpj" type="text" placeholder="Cnpj" className="inputs required" />
                     </div>
 
                     <div className="TituloCampo">
@@ -491,6 +482,56 @@ function Formulario() {
                             </select>
                         </div>
                     </div>
+
+                    <h2>Empresas</h2>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX3">Empresa</p>
+                        <p className="TituloCampoX1">Cnpj</p>
+                    </div>
+
+                    <div className="TituloCampo">
+                        <div className="TituloCampoX3">
+                            <input id="Empresa" type="text" placeholder="Empresa" className="inputs required" />
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <input id="Cnpj" type="text" placeholder="Cnpj" className="inputs required" />
+                        </div>
+                    </div>
+
+                    <div className="TituloCampo">
+                        <p className="TituloCampoX1">Cod. Empresa</p>
+                        <p className="TituloCampoX1">Admissão</p>
+                        <p className="TituloCampoX1">Demissão</p>
+                        <p className="TituloCampoX1">Contribuinte</p>
+                    </div>
+
+                    <div className="TituloCampo">
+
+                        <div className="TituloCampoX1">
+                            <input id="CodEmpresa" type="text" placeholder="Cod. Empresa" className="inputs required" />
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <input id="Admissao" type="date" placeholder="Data de Admissão" className="typeDate" />
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <input id="Demissão" type="date" placeholder="Data de Demissão" className="typeDate" />
+                        </div>
+
+                        <div className="TituloCampoX1">
+                            <select id="Contribuinte" className="select" >
+                                <option value="false">Não</option>
+                                <option value="true">Sim</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <input type="button" id="AddEmprego" onClick={AddEmprego} value="Adicionar Emprego" className="inputs required" />
+                    <CardEmprego Empregos={empregos} handleResult={updateEmpregos}></CardEmprego>
 
                     <h2>Endereço de Correspondencia</h2>
 
@@ -607,48 +648,6 @@ function Formulario() {
                         placeholder="Informações sobre o cliente ...">
                     </textarea>
 
-                    <h2>Empregos</h2>
-
-                    <div className="TituloCampo">
-                        <p className="TituloCampoX1">Empresa</p>
-                    </div>
-
-                    <div className="TituloCampoX3">
-                        <input id="Empresa" type="text" placeholder="Empresa" className="inputs required" />
-                    </div>
-
-                    <div className="TituloCampo">
-                        <p className="TituloCampoX1">Cod. Empresa</p>
-                        <p className="TituloCampoX1">Admissão</p>
-                        <p className="TituloCampoX1">Demissão</p>
-                        <p className="TituloCampoX1">Contribuinte</p>
-                    </div>
-
-                    <div className="TituloCampo">
-
-                        <div className="TituloCampoX1">
-                            <input id="CodEmpresa" type="text" placeholder="Cod. Empresa" className="inputs required" />
-                        </div>
-
-                        <div className="TituloCampoX1">
-                            <input id="Admissao" type="date" placeholder="Data de Admissão" className="typeDate" />
-                        </div>
-
-                        <div className="TituloCampoX1">
-                            <input id="Demissão" type="date" placeholder="Data de Demissão" className="typeDate" />
-                        </div>
-
-                        <div className="TituloCampoX1">
-                            <select id="Contribuinte" className="select" >
-                                <option value="false">Não</option>
-                                <option value="true">Sim</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <input type="button" id="AddEmprego" onClick={AddEmprego} value="Adicionar Emprego" className="inputs required" />
-                    <CardEmprego Empregos={empregos} handleResult={updateEmpregos}></CardEmprego>
                 </form>
             </div >
         </div >
