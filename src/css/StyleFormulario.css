@@ -1,11 +1,10 @@
 :root {
     --color-white: #ffffff;
     --color-red: #e63636;
-    --color-dark1: #000000;
-    --color-dark2: #7a5499;
+    --color-dark1: #0A1929;
+    --color-dark2: #bdc8d4;
     --color-purple1: #ac78e9;
     --color-purple2: rgb(50, 14, 75);
-    --color-gray: #b3a9a9;
 }
 
 * {
@@ -18,7 +17,7 @@ body {
     /* tipo de font */
     background-color: var(--color-dark1);
     /* cor do fundo da pagina */
-    color: var(--color-gray);
+    color: var(--color-purple2);
     /* cor do texto na div principal */
     display: flex;
     /* ajuste da div externa */
@@ -37,7 +36,7 @@ body {
     /* margem entre a div principal e os campos */
     border-radius: 5px;
     /* bordas da div principal */
-    min-width: 90%;
+    min-width: 100%;
     /* tamanho da ocupacao da div principal no navegador */
     overflow: auto;
 }
@@ -47,6 +46,11 @@ h1 {
     /* margem do texto de cabecalho */
     text-align: center;
     /* alinhamento do texto de cabecalho */
+}
+
+h2 {
+    padding-top: 1rem;
+    text-align: center;
 }
 
 .content form {
@@ -98,7 +102,7 @@ h1 {
     gap: 1rem;
 }
 
-.box-select>div.box-x1 {
+ .box-select>div.box-x1 {
     flex: 1;
     width: 100%;
 }
@@ -115,7 +119,7 @@ h1 {
 
 /* .box-select > div:nth-child(1){
     display: flex;
-    flex: 3;
+    flex: 2;
   }
   .box-select > div:nth-child(2){
     display: flex;
@@ -266,8 +270,8 @@ button[type="submit"]:hover {
     margin-bottom: 1em;
 }
 
-.purple {
-    background-color: #9264b7;
+.Back {
+    background-color: #92a3b5;
     padding: 15px;
     border-radius: 10px;
 }

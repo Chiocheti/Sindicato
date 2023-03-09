@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import Style from "../../css/StyleLogin.module.css"
 
+import { TextField } from "@mui/material";
+
 import Axios from "axios"
 
 function Login() {
@@ -46,18 +48,16 @@ function Login() {
         };
         Axios.request(options).then(function (response) {
             console.log("Achou")
+            sessionStorage.setItem("usuario", JSON.stringify(response.data))
             if (checkbox.checked) {
                 localStorage.setItem("usuario", JSON.stringify(response.data))
             }
-            sessionStorage.setItem("usuario", JSON.stringify(response.data))
             if (response.data.tipoPermissao == "adm") {
                 navigate("/AdminPage")
             } else if (response.data.tipoPermissao == "user") {
                 navigate("/Formulario")
             }
         }).catch(function (error) {
-            login.style.borderColor = "#ff0000"
-            senha.style.borderColor = "#ff0000"
             sessionStorage.removeItem("usuario")
             localStorage.removeItem("usuario")
             return 0;
@@ -71,14 +71,13 @@ function Login() {
                     <p className={Style.Title}>
                         Login
                     </p>
-                    <div>
-                        <p>Seu Login: </p>
-                        <input type="text" name="" id="inputLogin" className={Style.Input} />
+                    <div className={Style.Margin}>
+                        <TextField id="inputLogin" label="Login" variant="outlined" size="small" sx={{ width: "100%" }} />
                     </div>
-                    <div>
-                        <p>Sua Senha</p>
-                        <input type="text" name="" id="inputSenha" className={Style.Input} />
+                    <div className={Style.Margin}>
+                        <TextField id="inputSenha" label="Senha" variant="outlined" size="small" sx={{ width: "100%" }} />
                     </div>
+
                     <div className={Style.Flex}>
                         <input type="checkbox" name="" id="checkbox" />
                         <p className={Style.Text}>

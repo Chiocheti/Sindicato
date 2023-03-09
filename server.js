@@ -15,6 +15,9 @@ app.get("/", (req, res) => {
 });
 
 require('./app/routes/usuario.routes')(app);
+require('./app/routes/sindicalista.routes')(app);
+require('./app/routes/empresa.routes')(app);
+require('./app/routes/dependente.routes')(app);
 
 const Port = 3001;
 

@@ -6,9 +6,6 @@ function CardEmpresa({ Empregos, handleResult }) {
 
     var [recharg, setRecharg] = useState("")
 
-    console.log("Empregos ---")
-    console.log(Empregos)
-
     const update = result => {
         console.log("Valor -> Card")
         setRecharg(result)
@@ -20,7 +17,7 @@ function CardEmpresa({ Empregos, handleResult }) {
         <div>
             {
                 Empregos.map((emprego) => (
-                    <div className="Second">
+                    <div key={emprego.EmpId} className="Second">
                         <Item emprego={emprego} handleResult={update} />
                     </div>
                 ))

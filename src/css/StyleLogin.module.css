@@ -1,47 +1,53 @@
-.All{
+.All {
     background-color: rgb(50, 14, 75);
     padding: 20px;
     border-radius: 5px;
     width: 90vw;
     max-width: 500px;
-    height: 90vh;
     max-height: 320px;
+    color: black;
 }
 
-.Body{
-    background-color: rgb(77, 22, 117);
+.Body {
+    background-color: #bdc8d4;
     padding: 20px;
     border-radius: 20px;
 }
 
-.Title{
+.Title {
     font-weight: bolder;
     font-size: 60px;
     text-align: center;
     margin-bottom: 20px;
+    color: black;
 }
 
-.Input{
+.Margin {
+    margin-top: 10px;
+}
+
+.Input {
     width: 100%;
     height: 2vh;
-    border-right: 5px solid black ;
+    border-right: 5px solid black;
     margin-bottom: 10px;
     padding: 2px;
 }
 
-.Flex{
+.Flex {
     display: flex;
+    margin-top: 10px;
 }
 
-.DivBtt{
+.DivBtt {
     text-align: center
 }
 
-.Text{
+.Text {
     margin-left: 5px;
 }
 
-.Btt{
+.Btt {
     margin-top: 25px;
     width: 100%;
     height: 25px;
@@ -50,8 +56,8 @@
     font-weight: bolder;
 }
 
-.Btt:hover{
-    background-color:rgb(50, 14, 75);
+.Btt:hover {
+    background-color: rgb(50, 14, 75);
     color: white;
     transition: .5s;
 }

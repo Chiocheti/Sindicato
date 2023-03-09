@@ -2,8 +2,10 @@ import Style from "../../css/StyleAdminPage.module.css"
 
 import { useNavigate } from 'react-router-dom'
 import Axios from "axios";
+import { v4 as uuid } from "uuid"
 
 import { useState, useEffect } from "react";
+import { TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 
 function AdminPage() {
 
@@ -33,6 +35,12 @@ function AdminPage() {
         }
     })
 
+    const [tipo, setTipo] = useState('');
+
+    const handleChange = (event) => {
+        setTipo(event.target.value);
+    };
+
     function LogOut() {
         localStorage.removeItem("usuario")
         sessionStorage.removeItem("usuario")
@@ -42,125 +50,110 @@ function AdminPage() {
     function CriarConta() {
         var nomeUsuario = document.getElementById("nomeUsuario")
         var idSindicato = document.getElementById("idSindicato")
-        var tipoPermissao = document.getElementById("tipoPermissao")
         var loginUsuario = document.getElementById("loginUsuario")
         var telefoneUsuario = document.getElementById("telefoneUsuario")
         var senhaUsuario = document.getElementById("senhaUsuario")
         var repeteSenha = document.getElementById("repeteSenha")
-        var password = document.getElementById("password")
 
-        if (nomeUsuario.value == "" || nomeUsuario.value == null) {
-            nomeUsuario.style.borderColor = "#FF0000"
-            return false
-        } else {
-            nomeUsuario.style.borderColor = "#000000"
-            if (idSindicato.value == "" || idSindicato.value == null) {
-                idSindicato.style.borderColor = "#FF0000"
-                return false
-            } else {
-                idSindicato.style.borderColor = "#000000"
-                if (loginUsuario.value == "" || loginUsuario.value == null) {
-                    loginUsuario.style.borderColor = "#FF0000"
-                    return false
-                } else {
-                    loginUsuario.style.borderColor = "#000000"
-                    if (telefoneUsuario.value == "" || telefoneUsuario.value == null) {
-                        telefoneUsuario.style.borderColor = "#FF0000"
-                        return false
-                    }
-                    else {
-                        telefoneUsuario.style.borderColor = "#000000"
-                        if (senhaUsuario.value == "" || senhaUsuario.value == null || senhaUsuario.value != repeteSenha.value) {
-                            senhaUsuario.style.borderColor = "#FF0000"
-                            repeteSenha.style.borderColor = "#FF0000"
-                            return false
-                        } else {
-                            senhaUsuario.style.borderColor = "#000000"
-                            repeteSenha.style.borderColor = "#000000"
-
-                            const save = {
-                                method: 'POST',
-                                url: 'http://localhost:3001/api/usuario',
-                                headers: { 'Content-Type': 'application/json' },
-                                data: {
-                                    idSindicato: idSindicato.value,
-                                    nomeUsuario: nomeUsuario.value,
-                                    tipoPermissao: tipoPermissao.value,
-                                    loginUsuario: loginUsuario.value,
-                                    senhaUsuario: senhaUsuario.value,
-                                    telefoneUsuario: telefoneUsuario.value
-                                }
-                            };
-                            Axios.request(save).then(function (response) {
-                                console.log(response.data);
-                                idSindicato.value = ""
-                                nomeUsuario.value = ""
-                                loginUsuario.value = ""
-                                senhaUsuario.value = ""
-                                repeteSenha.value = ""
-                                telefoneUsuario = ""
-                            }).catch(function (error) {
-                                console.error(error);
-                            });
-                        }
-                    }
-                }
+        const save = {
+            method: 'POST',
+            url: 'http://localhost:3001/api/usuario',
+            headers: { 'Content-Type': 'application/json' },
+            data: {
+                idUsuario: uuid(),
+                idSindicato: idSindicato.value,
+                nomeUsuario: nomeUsuario.value,
+                tipoPermissao: tipo,
+                loginUsuario: loginUsuario.value,
+                senhaUsuario: senhaUsuario.value,
+                telefoneUsuario: telefoneUsuario.value
             }
-        }
+        };
+
+        Axios.request(save).then(function (response) {
+            console.log(response.data);
+            idSindicato.value = null
+            nomeUsuario.value = null
+            loginUsuario.value = null
+            senhaUsuario.value = null
+            repeteSenha.value = null
+            telefoneUsuario.value = null
+        }).catch(function (error) {
+            console.error(error);
+        });
     }
 
     return (
         <div>
             <div className={Style.All}>
                 <div className={Style.Body}>
+
                     <p className={Style.Title}>
                         Cadastrar Usuario
                     </p>
-                    <div>
-                        <p>Nome do Usuario: </p>
-                        <input type="text" name="" id="nomeUsuario" className={Style.Input} />
+
+                    <div className={Style.box_block}>
+
+                        <div className={Style.box_x2}>
+                            <TextField id="nomeUsuario" label="Nome de usuario" variant="outlined" size="small" sx={{ width: "100%" }} />
+                        </div>
+
+                        <div className={Style.box_x1}>
+                            <TextField id="idSindicato" label="Sindicato" variant="outlined" size="small" sx={{ width: "100%" }} />
+                        </div>
+
                     </div>
-                    <div className={Style.Senhas}>
-                        <div>
-                            <p>Sindicato: </p>
-                            <input type="text" name="" id="idSindicato" className={Style.Input} />
+
+                    <br />
+
+                    <div className={Style.box_block}>
+
+                        <div className={Style.box_x1}>
+                            <TextField id="loginUsuario" label="Login" variant="outlined" size="small" sx={{ width: "100%" }} />
                         </div>
-                        <div>
-                            <p>Tipo de Permissão</p>
-                            <select name="Permissao" id="tipoPermissao" className={Style.InputPermissao}>
-                                <option value="User">Usuario</option>
-                                <option value="Adm">Administrador</option>
-                            </select>
+
+                        <div className={Style.box_x1}>
+                            <TextField id="telefoneUsuario" label="Telefone" variant="outlined" size="small" sx={{ width: "100%" }} />
                         </div>
+
                     </div>
-                    <div className={Style.Senhas}>
-                        <div>
-                            <p>Login do Usuario: </p>
-                            <input type="text" name="" id="loginUsuario" className={Style.Input} />
+
+                    <br />
+
+                    <div className={Style.box_block}>
+
+                        <div className={Style.box_x1}>
+                            <TextField id="senhaUsuario" label="Senha" variant="outlined" size="small" sx={{ width: "100%" }} />
                         </div>
-                        <div>
-                            <p>Telefone: </p>
-                            <input type="text" name="" id="telefoneUsuario" className={Style.Input} />
+
+                        <div className={Style.box_x1}>
+                            <TextField id="repeteSenha" label="Repetir Senha" variant="outlined" size="small" sx={{ width: "100%" }} />
                         </div>
+
                     </div>
-                    <div className={Style.Senhas}>
-                        <div>
-                            <p>Insira uma Senha</p>
-                            <input type="text" name="" id="senhaUsuario" className={Style.Input} />
-                        </div>
-                        <div>
-                            <p>Repetir Senha</p>
-                            <input type="text" name="" id="repeteSenha" className={Style.Input} />
-                        </div>
+
+                    <br />
+
+                    <div className={Style.box_x1}>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Tipo de Permissão</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="tipoPermissao"
+                                label="Tipo de Permissão"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value={"User"}>Usuario</MenuItem>
+                                <MenuItem value={"Adm"}>Administrador</MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
-                    <div>
-                        <h1>Insira sua SENHA </h1>
-                        <input type="text" name="" id="password" className={Style.Input} />
-                    </div>
+
                     <div className={Style.DivBtt}>
                         <input type="button" value="Cadastrar" className={Style.Btt} onClick={CriarConta} />
                         <input type="button" value="Voltar" className={Style.Btt} onClick={LogOut} />
                     </div>
+
                 </div>
             </div>
         </div>

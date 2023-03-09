@@ -17,8 +17,8 @@ Usuario.create = (newUsuario, result) => {
             result(err, null);
             return;
         }
-        console.log('Usuario criado com sucesso: ', { idUsuario: res.insertId, ...newUsuario });
-        result(null, { idUsuario: res.insertId, ...newUsuario })
+        console.log('Usuario criado com sucesso: ', { ...newUsuario });
+        result(null, { ...newUsuario })
     })
 };
 

@@ -17,7 +17,7 @@ function CardDependente({ Dependentes, handleResult }) {
         <div>
             {
                 Dependentes.map((dependente) => (
-                    <div className="Second">
+                    <div key={dependente.DepId} className="Second">
                         <Item dependente={dependente} handleResult={update}/>
                     </div>
                 ))
