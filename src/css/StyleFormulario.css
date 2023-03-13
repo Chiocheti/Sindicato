@@ -36,9 +36,9 @@ body {
     /* margem entre a div principal e os campos */
     border-radius: 5px;
     /* bordas da div principal */
-    min-width: 100%;
+    width: 100%;
     /* tamanho da ocupacao da div principal no navegador */
-    overflow: auto;
+    overflow: 100%;
 }
 
 h1 {
@@ -59,47 +59,12 @@ h2 {
     gap: 1rem;
 }
 
-.span-required {
-    display: none;
-    /* oculta mensagens dos campos */
-    /* "right" mostra os campos */
-}
-
-.inputs {
-    padding: 8px 5px;
-    /* altura dos campos - margem esquerda */
-    outline: none;
-    /* largura da margem dos campos em px */
-    border-radius: 5px;
-    background-color: var(--color-dark1);
-    border: 2px solid var(--color-dark1);
-    /* borda das celulas "none;"  elimina */
-    color: var(--color-white);
-    width: 100%;
-    /* area da div interna dentro da externa */
-    box-sizing: border-box;
-    /* mantem bordas entra a div interna e a externa */
-    transition: .5s;
-}
-
-.inputs:focus {
-    border-color: var(--color-purple1);
-    /* cor da borda ao clicar */
-}
-
 .box-select {
     /* border: 1px solid red; */
     display: flex;
     justify-items: normal;
     gap: 0.5rem;
     align-items: center;
-    
-}
-
-.box-block {
-    /* border: 1px solid red; */
-    display: flex;
-    gap: 1rem;
 }
 
  .box-select>div.box-x1 {
@@ -117,152 +82,10 @@ h2 {
     width: 100%;
 }
 
-/* .box-select > div:nth-child(1){
-    display: flex;
-    flex: 2;
-  }
-  .box-select > div:nth-child(2){
-    display: flex;
-    flex: 1;
-  }
-  .box-select > div:nth-child(3){
-    display: flex;
-    flex: 1;
-  } */
-
-button[type="submit"] {
-    padding: 1rem;
-    font-size: 1rem;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    margin-top: 1rem;
-    background-color: var(--color-purple2);
-    color: var(--color-white);
-    cursor: pointer;
-    transition: .5s;
-}
-
-button[type="submit"]:hover {
-    background-color: var(--color-purple1);
-}
-
 @media screen and (max-width: 576px) {
     .box-select {
         flex-direction: column;
     }
-}
-
-.select {
-    background-color: #000000;
-    color: #b3a9a9;
-    border-radius: 5px;
-    width: 100%;
-    margin-right: 5px;
-    height: 35px;
-}
-
-.date {
-    background-color: #000000;
-    color: #b3a9a9;
-    border-radius: 5px;
-    vertical-align: middle;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
-    padding: 8px 5px;
-    outline: none;
-    font: 16px;
-}
-
-.LicMed {
-    margin-top: 5px;
-    width: 25px;
-    height: 25px;
-    background-color: #e9e9e9;
-}
-
-.typeDate {
-    font: 16px;
-    background-color: #000;
-    color: #b3a9a9;
-    border-radius: 5px;
-    vertical-align: middle;
-    width: 100%;
-    height: 30px;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
-    text-align: center;
-}
-
-.BttEndereco {
-    border-radius: 20px;
-    justify-content: center;
-    padding: 5px;
-    background-color: #000000;
-    color: #b3a9a9;
-    width: 100%;
-}
-
-.BttEndereco:Hover {
-    opacity: 0.5;
-    transition: .5s;
-}
-
-.BttMedico {
-    border-radius: 20px;
-    justify-content: center;
-    padding: 5px;
-    background-color: #000000;
-    color: #b3a9a9;
-    border: 2px solid;
-    border-color: #FF0000;
-    text-align: center;
-    justify-content: center;
-    justify-items: center;
-}
-
-.BttMedico:Hover {
-    opacity: 0.5;
-    transition: .5s;
-}
-
-.BttMedicoItem {
-    border-radius: 20px;
-    justify-content: center;
-    padding: 5px;
-    background-color: #000000;
-    color: #b3a9a9;
-    border: 2px solid;
-    border-color: #FF0000;
-    text-align: center;
-    justify-content: center;
-    justify-items: center;
-}
-
-.BttMedicoItem:Hover {
-    opacity: 0.5;
-    transition: .5s;
-}
-
-.BttDelete {
-    border-radius: 20px;
-    justify-content: center;
-    padding: 5px;
-    background-color: #000000;
-    color: #ffffff;
-    border: 2px solid;
-    border-color: #FF0000;
-    text-align: center;
-    justify-content: center;
-    justify-items: center;
-}
-
-.BttDelete:Hover {
-    transition: .5s;
-    background-color: #e64949;
-    color: #ffffff
-}
-
-.divForm {
-    margin-top: 10px;
 }
 
 .Second {
@@ -340,26 +163,4 @@ button[type="submit"]:hover {
 
 .UserName:hover {
     background-color: var(--color-purple1);
-}
-
-.TituloCampo {
-    /* border: 1px solid red; */
-    display: flex;
-    justify-items: normal;
-    align-items: center;
-}
-
-.TituloCampoX1 {
-    margin-left: 5px;
-    flex: 1;
-}
-
-.TituloCampoX2 {
-    margin-left: 5px;
-    flex: 2;
-}
-
-.TituloCampoX3 {
-    margin-left: 5px;
-    flex: 3;
 }

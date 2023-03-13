@@ -34,7 +34,7 @@ Dependente.getAll = result => {
 }
 
 Dependente.findById = (DepId, result) => {
-    sql.query(`SELECT * FROM Dependente WHERE DepId = ${DepId}`, (err, res) => {
+    sql.query(`SELECT * FROM Dependente WHERE DepId = ?`, [DepId], (err, res) => {
         if (err) {
             console.log(`Houve um erro: ${err}`);
             result(err, null);
@@ -51,7 +51,7 @@ Dependente.findById = (DepId, result) => {
 }
 
 Dependente.findBySindId = (SindId, result) => {
-    sql.query(`SELECT * FROM Dependente WHERE Dependente.SindId = ${SindId};`, (err, res) => {
+    sql.query(`SELECT * FROM Dependente WHERE SindId = ?`, [SindId],(err, res) => {
         if (err) {
             console.log(`Houve um erro: ${err}`);
             result(err, null);

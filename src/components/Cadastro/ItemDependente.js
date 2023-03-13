@@ -10,6 +10,7 @@ function ItemDependente({ dependente, handleResult }) {
     }
 
     return (
+        
         <div className="purple">
 
             <div className="box-select">
@@ -71,10 +72,16 @@ function ItemDependente({ dependente, handleResult }) {
                 </div>
 
                 <div>
-                    <Button variant="outlined" onClick={deleteDependente}>
+                    <Button
+                        variant="outlined"
+                        onClick={deleteDependente}
+                        sx={{
+                            width: '100%'
+                        }}>
                         Deletar
                     </Button>
                 </div>
+
             </div>
         </div>
     )

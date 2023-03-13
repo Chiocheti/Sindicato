@@ -35,7 +35,7 @@ Empresa.getAll = result => {
 }
 
 Empresa.findById = (EmpId, result) => {
-    sql.query(`SELECT * FROM Empresa WHERE EmpId = ${EmpId}`, (err, res) => {
+    sql.query(`SELECT * FROM Empresa WHERE EmpId = ?`, [EmpId], (err, res) => {
         if (err) {
             console.log(`Houve um erro: ${err}`);
             result(err, null);
@@ -52,7 +52,7 @@ Empresa.findById = (EmpId, result) => {
 }
 
 Empresa.findBySindId = (SindId, result) => {
-    sql.query(`SELECT * FROM Empresa WHERE Empresa.SindId = ${SindId};`, (err, res) => {
+    sql.query(`SELECT * FROM Empresa WHERE Empresa.SindId = ?`, [SindId] ,(err, res) => {
         if (err) {
             console.log(`Houve um erro: ${err}`);
             result(err, null);

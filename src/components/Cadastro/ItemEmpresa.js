@@ -17,7 +17,6 @@ function ItemEmpresa({ emprego, handleResult }) {
 
                 <div className="box-x1">
                     <TextField
-                        id="CodEmpresa"
                         label="Cod. Empresa"
                         defaultValue={emprego.EmpCodEmpresa}
                         size="small"
@@ -32,7 +31,6 @@ function ItemEmpresa({ emprego, handleResult }) {
 
                 <div className="box-x3">
                     <TextField
-                        id="Empresa"
                         label="Empresa"
                         defaultValue={emprego.EmpNome}
                         size="small"
@@ -47,7 +45,6 @@ function ItemEmpresa({ emprego, handleResult }) {
 
                 <div className="box-x1">
                     <TextField
-                        id="Admissao"
                         label="Admissão"
                         defaultValue={emprego.EmpAdmissao}
                         size="small"
@@ -62,7 +59,6 @@ function ItemEmpresa({ emprego, handleResult }) {
 
                 <div className="box-x1">
                     <TextField
-                        id="Demissão"
                         label="Demissão"
                         defaultValue={emprego.EmpDemissao}
                         size="small"
@@ -77,7 +73,6 @@ function ItemEmpresa({ emprego, handleResult }) {
 
                 <div className="box-x1">
                     <TextField
-                        id="Contribuinte"
                         label="Contribuinte"
                         defaultValue={emprego.EmpContribuinte}
                         size="small"
@@ -91,12 +86,16 @@ function ItemEmpresa({ emprego, handleResult }) {
                 </div>
 
                 <div>
-                    <Button variant="outlined"
+                    <Button
+                        variant="outlined"
                         onClick={deleteEmprego}
-                    >
+                        sx={{
+                            width: '100%'
+                        }}>
                         Deletar
                     </Button>
                 </div>
+
             </div>
         </div>
 

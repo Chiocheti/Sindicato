@@ -9,7 +9,24 @@ import Axios from "axios";
 
 import { useState, useEffect } from "react";
 
-import { TextField, InputLabel, MenuItem, FormControl, Select, Button } from "@mui/material";
+import {
+    TextField,
+    InputLabel,
+    MenuItem,
+    FormControl,
+    Select,
+    Button,
+    Box,
+    AppBar,
+    Toolbar,
+    InputBase,
+    IconButton
+} from "@mui/material";
+
+
+import MenuIcon from '@mui/icons-material/Menu';
+
+import Drawer from "../Cadastro/Drawer.js"
 
 function Formulario() {
 
@@ -33,8 +50,19 @@ function Formulario() {
 
     var [contribuinte, setContribuinte] = useState("")
 
+    var [rua01, setRua01] = useState("")
+    var [bairro01, setBairro01] = useState("")
+    var [cidade01, setCidade01] = useState("")
+    var [estado01, setEstado01] = useState("")
+    var [rua02, setRua02] = useState("")
+    var [bairro02, setBairro02] = useState("")
+    var [cidade02, setCidade02] = useState("")
+    var [estado02, setEstado02] = useState("")
+
     var [sexoDependente, setSexoDependente] = useState("")
     var [parentescoDependente, setParentescoDependente] = useState("")
+
+    var [mostrar, setMostrar] = useState(false)
 
     const navigate = useNavigate();
 
@@ -65,7 +93,6 @@ function Formulario() {
 
             Axios.request(options).then(function (response) {
                 console.log("Achou")
-                document.getElementById("nomeUsuario").value = `Nome Usuario: ${user.nomeUsuario}`
             }).catch(function (error) {
                 navigate("/")
             });
@@ -111,6 +138,10 @@ function Formulario() {
     const switchDeficiencia = (event) => {
         setDeficiencia(event.target.value);
     };
+
+    function switchMostrar() {
+        setMostrar(!mostrar);
+    }
 
     const update = result => {
         console.log("Valor -> Pai")
@@ -185,12 +216,10 @@ function Formulario() {
         Axios.request(options).then(function (response) {
             console.log(response.data)
             var endereco = response.data
-            console.log("Endedeço: ")
-            console.log(endereco)
-            document.getElementById("end01Rua").value = endereco.logradouro
-            document.getElementById("end01Bairro").value = endereco.bairro
-            document.getElementById("end01Cidade").value = endereco.localidade
-            document.getElementById("end01Estado").value = endereco.uf
+            setRua01(endereco.logradouro)
+            setBairro01(endereco.bairro)
+            setCidade01(endereco.localidade)
+            setEstado01(endereco.uf)
 
         }).catch(function (error) {
             console.log(error)
@@ -207,13 +236,10 @@ function Formulario() {
         Axios.request(options).then(function (response) {
             console.log(response.data)
             var endereco = response.data
-            console.log("Endedeço: ")
-            console.log(endereco)
-
-            document.getElementById("end02Rua").value = endereco.logradouro
-            document.getElementById("end02Bairro").value = endereco.bairro
-            document.getElementById("end02Cidade").value = endereco.localidade
-            document.getElementById("end02Estado").value = endereco.uf
+            setRua02(endereco.logradouro)
+            setBairro02(endereco.bairro)
+            setCidade02(endereco.localidade)
+            setEstado02(endereco.uf)
 
         }).catch(function (error) {
             console.log(error)
@@ -406,29 +432,35 @@ function Formulario() {
         }).catch(function (error) {
             console.error(error);
         });
-
-
-
-
     }
 
     return (
 
         <div>
-            <div className="Navbar">
 
-                <div className="NavbarContent">
+            <AppBar position="fixed"  >
 
-                    <input type="text" name="" id="nomeUsuario" value={""} readOnly className="UserName" />
+                <Toolbar>
+                    <Box display="flex">
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ mr: 2 }}
+                            onClick={switchMostrar}
+                        >
+                            <MenuIcon />
+                        </IconButton>
 
-                    <div className="Flex">
-                        <input type="button" className="Save" value="Salvar" onClick={CadastraSindicalista} />
-                        <input type="button" className="Save" value="Deslogar" onClick={LogOut} />
-                    </div>
+                        <Button color="inherit" onClick={CadastraSindicalista}>Salvar</Button>
+                        <Button color="inherit" onClick={LogOut}>Deslogar</Button>
 
-                </div>
+                    </Box>
+                </Toolbar>
+            </AppBar>
 
-            </div>
+            <Drawer mostrar={mostrar} troca={switchMostrar}></Drawer>
 
             <div className="content">
 
@@ -666,14 +698,28 @@ function Formulario() {
 
                     </div>
 
+                    <div className="box-x1">
+                        <TextField id="detalhes" label="Descrição" variant="outlined"
+                            multiline
+                            maxRows={3}
+                            sx={{
+                                width: '100%'
+                            }} />
+                    </div>
+
                     <h2>Endereço de Correspondencia</h2>
 
                     <div className="box-select">
 
                         <div className="box-x1">
-                            <TextField id="end01Cep" label="CEP" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end01Cep"
+                                label="CEP"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div>
@@ -690,21 +736,38 @@ function Formulario() {
 
 
                         <div className="box-x3">
-                            <TextField id="end01Rua" label="Rua" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end01Rua"
+                                label="Rua"
+                                variant="outlined"
+                                size="small"
+                                value={rua01}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x1">
-                            <TextField id="end01Numero" label="Número" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end01Numero"
+                                label="Número"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x2">
-                            <TextField id="end01Bairro" label="Bairro" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end01Bairro"
+                                label="Bairro"
+                                variant="outlined"
+                                size="small"
+                                value={bairro01}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                     </div>
@@ -712,15 +775,39 @@ function Formulario() {
                     <div className="box-select">
 
                         <div className="box-x1">
-                            <TextField id="end01Estado" label="Estado" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end01Estado"
+                                label="Estado"
+                                variant="outlined"
+                                size="small"
+                                value={estado01}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x3">
-                            <TextField id="end01Cidade" label="Cidade" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end01Cidade"
+                                label="Cidade"
+                                variant="outlined"
+                                size="small"
+                                value={cidade01}
+                                sx={{
+                                    width: '100%'
+                                }} />
+                        </div>
+
+                        <div className="box-x1">
+                            <Button variant="outlined"
+                                id="BttAddEndereco"
+                                onClick={AddEndereco}
+                                value={"Adicionar"}
+                                sx={{
+                                    width: '100%'
+                                }}>
+                                {useEndereco02 == true ? "Remover" : "Adicionar"}
+                            </Button>
                         </div>
 
                     </div>
@@ -730,9 +817,14 @@ function Formulario() {
                     <div id="endereco02" className="box-select">
 
                         <div className="box-x1">
-                            <TextField id="end02Cep" label="CEP" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end02Cep"
+                                label="CEP"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div >
@@ -747,21 +839,38 @@ function Formulario() {
                         </div>
 
                         <div className="box-x3">
-                            <TextField id="end02Rua" label="Rua" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end02Rua"
+                                label="Rua"
+                                variant="outlined"
+                                size="small"
+                                value={rua02}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x1">
-                            <TextField id="end02Numero" label="Número" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end02Numero"
+                                label="Número"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x2">
-                            <TextField id="end02Bairro" label="Bairro" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end02Bairro"
+                                label="Bairro"
+                                variant="outlined"
+                                size="small"
+                                value={bairro02}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                     </div>
@@ -769,50 +878,55 @@ function Formulario() {
                     <div id="endereco03" className="box-select">
 
                         <div className="box-x1">
-                            <TextField id="end02Estado" label="Estado" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="end02Estado"
+                                label="Estado"
+                                variant="outlined"
+                                size="small"
+                                value={estado02}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x3">
-                            <TextField id="end02Cidade" label="Cidade" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
-                        </div>
-
-                    </div>
-
-                    <div className="box-select">
-
-                        <div className="box-x1">
-                            <Button variant="outlined"
-                                id="BttAddEndereco"
-                                onClick={AddEndereco}
-                                value={"Adicionar"}
+                            <TextField
+                                id="end02Cidade"
+                                label="Cidade"
+                                variant="outlined"
+                                size="small"
+                                value={cidade02}
                                 sx={{
                                     width: '100%'
-                                }}>
-                                Adicionar
-                            </Button>
+                                }} />
                         </div>
 
                     </div>
-
 
                     <h2>Empresas</h2>
 
                     <div className="box-select">
 
                         <div className="box-x1">
-                            <TextField id="CodEmpresa" label="Cod. Empr." variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="CodEmpresa"
+                                label="Cod. Empr."
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x3">
-                            <TextField id="Empresa" label="Empresa" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="Empresa"
+                                label="Empresa"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x1">
@@ -930,16 +1044,6 @@ function Formulario() {
 
                     <CardDependente Dependentes={dependentes} handleResult={update}></CardDependente>
 
-                    <h2>Observações sobre o Cliente</h2>
-
-                    <div className="box-x3">
-                        <TextField id="detalhes" label="Descrição" variant="outlined"
-                            multiline
-                            maxRows={10}
-                            sx={{
-                                width: '100%'
-                            }} />
-                    </div>
                 </form>
             </div >
         </div >
