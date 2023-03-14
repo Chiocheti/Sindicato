@@ -12,12 +12,14 @@ import {
     Typography
 } from "@mui/material";
 
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 import React, { useState } from 'react';
 import Axios from "axios"
 
 import CardBuscaSindicalistas from "./CardBuscaSindicalistas";
 
-export default function CompDrawer({ mostrar, troca }) {
+export default function CompDrawer({ mostrar, troca, teste }) {
 
     var [type, setType] = useState("Nome")
     var [sindicalistas, setSindicalistas] = useState([])
@@ -50,7 +52,14 @@ export default function CompDrawer({ mostrar, troca }) {
                 onClose={troca}
                 color={"#bdc8d4"}
             >
-                <Box display={'flex'} flexDirection={'column'} padding={2}>
+                <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    padding={2}
+                    sx={{
+                        width: useMediaQuery('(min-width:600px)') ? "30vw" : "50vw", 
+                    }}
+                >
 
                     <Typography variant="h6" component="div">
                         {"Usuario: " + JSON.parse(sessionStorage.getItem("usuario")).nomeUsuario}
@@ -97,9 +106,7 @@ export default function CompDrawer({ mostrar, troca }) {
 
                     <Divider />
 
-                    <br />
-                    
-                    <CardBuscaSindicalistas Sindicalistas={sindicalistas}></CardBuscaSindicalistas>
+                    <CardBuscaSindicalistas Sindicalistas={sindicalistas} Teste={teste}></CardBuscaSindicalistas>
 
                 </Box>
             </Drawer>

@@ -19,7 +19,6 @@ import {
     Box,
     AppBar,
     Toolbar,
-    InputBase,
     IconButton
 } from "@mui/material";
 
@@ -32,32 +31,53 @@ function Formulario() {
 
     var [usuario, setUsuario] = useState("")
 
+    var [sindCodSind, setSindCodSind] = useState("")
+    var [sindNome, setSindNome] = useState("")
+    var [sindCpf, setSindCpf] = useState("")
+    var [sindRg, setSindRg] = useState("")
+    var [sindOrgaoEmissor, setSindOrgaoEmissor] = useState("")
+    var [sindCel01, setSindCel01] = useState("")
+    var [sindCel02, setSindCel02] = useState("")
+    var [sindCel03, setSindCel03] = useState("")
+    var [sindNascimento, setSindNascimento] = useState("")
+    var [sindEmail, setSindEmail] = useState("")
+    var [sindCarteiraDeTrabalho, setSindCarteiraDeTrabalho] = useState("")
+    var [sindVencimento, setSindVencimento] = useState("")
+
+    var [sindSexo, setSindSexo] = useState("")
+    var [sindCivil, setSindCivil] = useState("")
+    var [sindInstrucao, setSindInstrucao] = useState("")
+    var [sindTipo, setSindTipo] = useState("")
+    var [sindSituacao, setSindSituacao] = useState("")
+    var [sindJornal, setSindJornal] = useState("")
+    var [sindDeficiencia, setSindDeficiencia] = useState("")
+    var [sindDetalhes, setSindDetalhes] = useState("")
+
+    var [cep01, setCep01] = useState("")
+    var [rua01, setRua01] = useState("")
+    var [numero01, setNumero01] = useState("")
+    var [bairro01, setBairro01] = useState("")
+    var [cidade01, setCidade01] = useState("")
+    var [estado01, setEstado01] = useState("")
+    
+    var [cep02, setCep02] = useState("")
+    var [numero02, setNumero02] = useState("")
+    var [rua02, setRua02] = useState("")
+    var [bairro02, setBairro02] = useState("")
+    var [cidade02, setCidade02] = useState("")
+    var [estado02, setEstado02] = useState("")
+
     var [useEndereco02, setUseEndereco02] = useState(false)
 
     var [dependentes, setDependentes] = useState([])
     var [totalDependentes, setTotalDependentes] = useState(0)
 
     var [empregos, setEmpregos] = useState([])
-    var [totalEmpregos, setTotalEmpregos] = useState(false)
+    var [totalEmpregos, setTotalEmpregos] = useState(0)
 
-    var [sexo, setSexo] = useState("")
-    var [civil, setCivil] = useState("")
-    var [instrucao, setInstrucao] = useState("")
-    var [tipo, setTipo] = useState("")
-    var [situacao, setSituacao] = useState("")
-    var [jornal, setJornal] = useState("")
-    var [deficiencia, setDeficiencia] = useState("")
 
     var [contribuinte, setContribuinte] = useState("")
 
-    var [rua01, setRua01] = useState("")
-    var [bairro01, setBairro01] = useState("")
-    var [cidade01, setCidade01] = useState("")
-    var [estado01, setEstado01] = useState("")
-    var [rua02, setRua02] = useState("")
-    var [bairro02, setBairro02] = useState("")
-    var [cidade02, setCidade02] = useState("")
-    var [estado02, setEstado02] = useState("")
 
     var [sexoDependente, setSexoDependente] = useState("")
     var [parentescoDependente, setParentescoDependente] = useState("")
@@ -72,6 +92,11 @@ function Formulario() {
             document.getElementById("endereco01").style.display = "none"
             document.getElementById("endereco02").style.display = "none"
             document.getElementById("endereco03").style.display = "none"
+            setCep02()
+            setRua02()
+            setBairro02()
+            setCidade02()
+            setEstado02()
         } else {
             document.getElementById("endereco01").style.display = "flex"
             document.getElementById("endereco02").style.display = "flex"
@@ -112,35 +137,72 @@ function Formulario() {
     };
 
     const switchSexo = (event) => {
-        setSexo(event.target.value);
+        setSindSexo(event.target.value);
     };
 
     const switchCivil = (event) => {
-        setCivil(event.target.value);
+        setSindCivil(event.target.value);
     };
 
     const switchInstrucao = (event) => {
-        setInstrucao(event.target.value);
+        setSindInstrucao(event.target.value);
     };
 
     const switchTipo = (event) => {
-        setTipo(event.target.value);
+        setSindTipo(event.target.value);
     };
 
     const switchSituacao = (event) => {
-        setSituacao(event.target.value);
+        setSindSituacao(event.target.value);
     };
 
     const switchJornal = (event) => {
-        setJornal(event.target.value);
+        setSindJornal(event.target.value);
     };
 
     const switchDeficiencia = (event) => {
-        setDeficiencia(event.target.value);
+        setSindDeficiencia(event.target.value);
     };
 
     function switchMostrar() {
         setMostrar(!mostrar);
+    }
+
+
+    function print(editar) {
+        console.log(editar)
+        setSindCodSind(editar.SindCodSindicato)
+        setSindNome(editar.SindNome)
+        setSindCpf(editar.SindCpf)
+        setSindRg(editar.SindRg)
+        setSindOrgaoEmissor(editar.SindOrgaoEmissor)
+        setSindCel01(editar.SindCel01)
+        setSindCel02(editar.SindCel02)
+        setSindCel03(editar.SindCel03)
+        setSindNascimento(editar.SindNascimento)
+        setSindEmail(editar.SindEmail)
+        setSindCarteiraDeTrabalho(editar.SindCarteiraDeTrabalho)
+        setSindVencimento(editar.SindVencimento)
+        setSindSexo(editar.SindSexo)
+        setSindCivil(editar.SindEstadoCivil)
+        setSindInstrucao(editar.SindInstrucao)
+        setSindTipo(editar.SindTipo)
+        setSindSituacao(editar.SindSituacao)
+        setSindJornal(editar.SindJornal)
+        setSindDeficiencia(editar.SindDeficiencia)
+        setSindDetalhes(editar.SindDetalhes)
+        
+        setCep01(editar.End01Cep)
+        setRua01(editar.End01Rua)
+        setBairro01(editar.End01Bairro)
+        setCidade01(editar.End01Cidade)
+        setEstado01(editar.End01Estado)
+        
+        setCep02(editar.End01Cep)
+        setRua02(editar.End02Rua)
+        setBairro02(editar.End02Bairro)
+        setCidade02(editar.End02Cidade)
+        setEstado02(editar.End02Estado)
     }
 
     const update = result => {
@@ -281,11 +343,7 @@ function Formulario() {
             container01.style.display = "none"
             container02.style.display = "none"
             container03.style.display = "none"
-            document.getElementById("end02Cep").value = ("")
-            document.getElementById("end02Rua").value = ("")
-            document.getElementById("end02Bairro").value = ("")
-            document.getElementById("end02Cidade").value = ("")
-            document.getElementById("end02Estado").value = ("")
+
             setUseEndereco02(false)
         }
     }
@@ -360,13 +418,13 @@ function Formulario() {
                 SindEmail: email.value,
                 SindCarteiraDeTrabalho: carteira.value,
                 SindVencimento: vencimento.value,
-                SindSexo: sexo,
-                SindEstadoCivil: civil,
-                SindInstrucao: instrucao,
-                SindTipo: tipo,
-                SindSituacao: situacao,
-                SindJornal: jornal,
-                SindDeficiencia: deficiencia,
+                SindSexo: sindSexo,
+                SindEstadoCivil: sindCivil,
+                SindInstrucao: sindInstrucao,
+                SindTipo: sindTipo,
+                SindSituacao: sindSituacao,
+                SindJornal: sindJornal,
+                SindDeficiencia: sindDeficiencia,
                 SindDetalhes: detalhes.value,
                 End01Cep: end01Cep.value,
                 End01Rua: end01Rua.value,
@@ -460,7 +518,7 @@ function Formulario() {
                 </Toolbar>
             </AppBar>
 
-            <Drawer mostrar={mostrar} troca={switchMostrar}></Drawer>
+            <Drawer mostrar={mostrar} troca={switchMostrar} teste={print}></Drawer>
 
             <div className="content">
 
@@ -471,56 +529,48 @@ function Formulario() {
                     <div className="box-select">
 
                         <div className="box-x1">
-                            <TextField id="codSind" label="Cod. Sindicato" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="codSind"
+                                label="Cod. Sindicato"
+                                variant="outlined"
+                                size="small"
+                                value={sindCodSind}
+                                onChange={(event) => {
+                                    setSindCodSind(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x3">
-                            <TextField id="nome" label="Nome Completo" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="nome"
+                                label="Nome Completo"
+                                variant="outlined"
+                                size="small"
+                                value={sindNome}
+                                onChange={(event) => {
+                                    setSindNome(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x1">
-                            <TextField id="cpf" label="CPF" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
-                        </div>
-
-                    </div>
-
-
-                    <div className="box-select">
-
-                        <div className="box-x1">
-                            <TextField id="rg" label="RG" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
-                        </div>
-
-                        <div className="box-x1">
-                            <TextField id="orgaoEmissor" label="Órgão Emissor" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
-                        </div>
-
-                        <div className="box-x1">
-                            <TextField id="cel01" label="Celular" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
-                        </div>
-
-                        <div className="box-x1">
-                            <TextField id="cel02" label="Celular / Telefone 2" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
-                        </div>
-
-                        <div className="box-x1">
-                            <TextField id="cel03" label="Celular / Telefone 3" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="cpf"
+                                label="CPF"
+                                variant="outlined"
+                                size="small"
+                                value={sindCpf}
+                                onChange={(event) => {
+                                    setSindCpf(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                     </div>
@@ -528,30 +578,141 @@ function Formulario() {
                     <div className="box-select">
 
                         <div className="box-x1">
-                            <TextField id="nascimento" type="date" label="Data Nascimento" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }}
+                            <TextField
+                                id="rg"
+                                label="RG"
+                                variant="outlined"
+                                size="small"
+                                value={sindRg}
+                                onChange={(event) => {
+                                    setSindRg(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
+                        </div>
+
+                        <div className="box-x1">
+                            <TextField
+                                id="orgaoEmissor"
+                                label="Órgão Emissor"
+                                variant="outlined"
+                                size="small"
+                                value={sindOrgaoEmissor}
+                                onChange={(event) => {
+                                    setSindOrgaoEmissor(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
+                        </div>
+
+                        <div className="box-x1">
+                            <TextField
+                                id="cel01"
+                                label="Celular"
+                                variant="outlined"
+                                size="small"
+                                value={sindCel01}
+                                onChange={(event) => {
+                                    setSindCel01(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
+                        </div>
+
+                        <div className="box-x1">
+                            <TextField
+                                id="cel02"
+                                label="Celular / Telefone 2"
+                                variant="outlined"
+                                size="small"
+                                value={sindCel02}
+                                onChange={(event) => {
+                                    setSindCel02(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
+                        </div>
+
+                        <div className="box-x1">
+                            <TextField
+                                id="cel03"
+                                label="Celular / Telefone 3"
+                                variant="outlined"
+                                size="small"
+                                value={sindCel03}
+                                onChange={(event) => {
+                                    setSindCel03(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
+                        </div>
+
+                    </div>
+
+                    <div className="box-select">
+
+                        <div className="box-x1">
+                            <TextField
+                                id="nascimento"
+                                type="date"
+                                label="Data Nascimento"
+                                variant="outlined"
+                                size="small"
+                                value={sindNascimento}
+                                sx={{
+                                    width: '100%'
+                                }}
                                 InputLabelProps={{
                                     shrink: true,
                                 }} />
                         </div>
 
                         <div className="box-x2">
-                            <TextField id="email" label="E-Mail" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="email"
+                                label="E-Mail"
+                                variant="outlined"
+                                size="small"
+                                value={sindEmail}
+                                onChange={(event) => {
+                                    setSindEmail(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x1">
-                            <TextField id="carteira" label="Cart.de Trabalho" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="carteira"
+                                label="Cart.de Trabalho"
+                                variant="outlined"
+                                size="small"
+                                value={sindCarteiraDeTrabalho}
+                                onChange={(event) => {
+                                    setSindCarteiraDeTrabalho(event.target.value);
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x1">
-                            <TextField id="vencimento" type="date" label="Vencimento Carteirinha" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }}
+                            <TextField
+                                id="vencimento"
+                                type="date"
+                                label="Vencimento Carteirinha"
+                                variant="outlined"
+                                size="small"
+                                value={sindVencimento}
+                                sx={{
+                                    width: '100%'
+                                }}
                                 InputLabelProps={{
                                     shrink: true,
                                 }} />
@@ -569,9 +730,15 @@ function Formulario() {
                                     id="demo-simple-select"
                                     size="small"
                                     label="Sexo"
-                                    sx={{ width: '100%' }}
-                                    onChange={switchSexo}
+                                    value={sindSexo}
+                                    sx={{
+                                        width: '100%'
+                                    }}
+                                    onChange={(event) => {
+                                        setSindSexo(event.target.value);
+                                    }}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Masculino"}>Masculino</MenuItem>
                                     <MenuItem value={"Feminino"}>Feminino</MenuItem>
                                     <MenuItem value={"Outro"}>Outro</MenuItem>
@@ -587,9 +754,15 @@ function Formulario() {
                                     id="demo-simple-select"
                                     size="small"
                                     label="Estado Civil"
-                                    sx={{ width: '100%' }}
-                                    onChange={switchCivil}
+                                    value={sindCivil}
+                                    sx={{
+                                        width: '100%'
+                                    }}
+                                    onChange={(event) => {
+                                        setSindCivil(event.target.value);
+                                    }}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Solteiro"}>Solteiro</MenuItem>
                                     <MenuItem value={"Casado"}>Casado</MenuItem>
                                     <MenuItem value={"Separado"}>Separado</MenuItem>
@@ -610,9 +783,15 @@ function Formulario() {
                                     id="demo-simple-select"
                                     size="small"
                                     label="Instrução"
-                                    sx={{ width: '100%' }}
-                                    onChange={switchInstrucao}
+                                    value={sindInstrucao}
+                                    sx={{
+                                        width: '100%'
+                                    }}
+                                    onChange={(event) => {
+                                        setSindInstrucao(event.target.value);
+                                    }}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Não Alfabetizado"}>Não Alfabetizado</MenuItem>
                                     <MenuItem value={"Fundamental"}>Fundamental</MenuItem>
                                     <MenuItem value={"Ensino Médio"}>Ensino Médio</MenuItem>
@@ -632,9 +811,15 @@ function Formulario() {
                                     id="demo-simple-select"
                                     size="small"
                                     label="Tipo"
-                                    onChange={switchTipo}
-                                    sx={{ width: '100%' }}
+                                    value={sindTipo}
+                                    sx={{
+                                        width: '100%'
+                                    }}
+                                    onChange={(event) => {
+                                        setSindTipo(event.target.value);
+                                    }}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Associado"}>Associado</MenuItem>
                                     <MenuItem value={"Não Associado"}>Não Associado</MenuItem>
                                 </Select>
@@ -649,9 +834,15 @@ function Formulario() {
                                     id="demo-simple-select"
                                     size="small"
                                     label="Situação"
-                                    sx={{ width: '100%' }}
-                                    onChange={switchSituacao}
+                                    value={sindSituacao}
+                                    sx={{
+                                        width: '100%'
+                                    }}
+                                    onChange={(event) => {
+                                        setSindSituacao(event.target.value);
+                                    }}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Ativo"}>Ativo</MenuItem>
                                     <MenuItem value={"Aposentado"}>Aposentado</MenuItem>
                                     <MenuItem value={"Pensionista"}>Pensionista</MenuItem>
@@ -670,9 +861,15 @@ function Formulario() {
                                     id="demo-simple-select"
                                     size="small"
                                     label="Jornal"
-                                    sx={{ width: '100%' }}
-                                    onChange={switchJornal}
+                                    value={sindJornal}
+                                    sx={{
+                                        width: '100%'
+                                    }}
+                                    onChange={(event) => {
+                                        setSindJornal(event.target.value);
+                                    }}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Enviar"}>Enviar</MenuItem>
                                     <MenuItem value={"Não Enviar"}>Não Enviar</MenuItem>
                                 </Select>
@@ -687,9 +884,14 @@ function Formulario() {
                                     id="demo-simple-select"
                                     size="small"
                                     label="Deficiência"
-                                    onChange={switchDeficiencia}
-                                    sx={{ width: '100%' }}
+                                    sx={{
+                                        width: '100%'
+                                    }}
+                                    onChange={(event) => {
+                                        setSindDeficiencia(event.target.value);
+                                    }}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Não Possui"}>Não Possui</MenuItem>
                                     <MenuItem value={"Possui"}>Possui</MenuItem>
                                 </Select>
@@ -702,6 +904,10 @@ function Formulario() {
                         <TextField id="detalhes" label="Descrição" variant="outlined"
                             multiline
                             maxRows={3}
+                            value={sindDetalhes}
+                            onChange={(event) => {
+                                setSindDetalhes(event.target.value);
+                            }}
                             sx={{
                                 width: '100%'
                             }} />
@@ -717,12 +923,16 @@ function Formulario() {
                                 label="CEP"
                                 variant="outlined"
                                 size="small"
+                                value={cep01}
+                                onChange={(event) => {
+                                    setCep01(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
                         </div>
 
-                        <div>
+                        <div className="box-x1">
                             <Button variant="outlined"
                                 id="BttAddEndereco"
                                 onClick={BuscaCEP}
@@ -742,6 +952,9 @@ function Formulario() {
                                 variant="outlined"
                                 size="small"
                                 value={rua01}
+                                onChange={(event) => {
+                                    setRua01(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -753,6 +966,9 @@ function Formulario() {
                                 label="Número"
                                 variant="outlined"
                                 size="small"
+                                onChange={(event) => {
+                                    setNumero01(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -765,6 +981,9 @@ function Formulario() {
                                 variant="outlined"
                                 size="small"
                                 value={bairro01}
+                                onChange={(event) => {
+                                    setBairro01(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -781,6 +1000,9 @@ function Formulario() {
                                 variant="outlined"
                                 size="small"
                                 value={estado01}
+                                onChange={(event) => {
+                                    setEstado01(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -793,6 +1015,9 @@ function Formulario() {
                                 variant="outlined"
                                 size="small"
                                 value={cidade01}
+                                onChange={(event) => {
+                                    setCidade01(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -822,12 +1047,16 @@ function Formulario() {
                                 label="CEP"
                                 variant="outlined"
                                 size="small"
+                                value={cep02}
+                                onChange={(event) => {
+                                    setCep02(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
                         </div>
 
-                        <div >
+                        <div className="box-x1">
                             <Button variant="outlined"
                                 onClick={BuscaCEP02}
                                 value={"Buscar"}
@@ -845,6 +1074,9 @@ function Formulario() {
                                 variant="outlined"
                                 size="small"
                                 value={rua02}
+                                onChange={(event) => {
+                                    setRua02(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -856,6 +1088,9 @@ function Formulario() {
                                 label="Número"
                                 variant="outlined"
                                 size="small"
+                                onChange={(event) => {
+                                    setNumero02(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -868,6 +1103,9 @@ function Formulario() {
                                 variant="outlined"
                                 size="small"
                                 value={bairro02}
+                                onChange={(event) => {
+                                    setBairro02(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -884,6 +1122,9 @@ function Formulario() {
                                 variant="outlined"
                                 size="small"
                                 value={estado02}
+                                onChange={(event) => {
+                                    setEstado02(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -896,6 +1137,9 @@ function Formulario() {
                                 variant="outlined"
                                 size="small"
                                 value={cidade02}
+                                onChange={(event) => {
+                                    setCidade02(event.target.value);
+                                }}
                                 sx={{
                                     width: '100%'
                                 }} />
@@ -930,18 +1174,30 @@ function Formulario() {
                         </div>
 
                         <div className="box-x1">
-                            <TextField id="Admissao" type="date" label="Data Admissão" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }}
+                            <TextField
+                                id="Admissao"
+                                type="date"
+                                label="Data Admissão"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }}
                                 InputLabelProps={{
                                     shrink: true,
                                 }} />
                         </div>
 
                         <div className="box-x1">
-                            <TextField id="Demissão" type="date" label="Data Demissão" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }}
+                            <TextField
+                                id="Demissão"
+                                type="date"
+                                label="Data Demissão"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }}
                                 InputLabelProps={{
                                     shrink: true,
                                 }} />
@@ -958,17 +1214,21 @@ function Formulario() {
                                     sx={{ width: '100%' }}
                                     onChange={switchContribuinte}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Sim"}>Sim</MenuItem>
                                     <MenuItem value={"Não"}>Não</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
 
-                        <div>
+                        <div className="box-x1">
                             <Button
                                 variant="outlined"
                                 id="BttAddEndereco"
                                 onClick={AddEmprego}
+                                sx={{
+                                    width: '100%'
+                                }}
                             >
                                 Adicionar
                             </Button>
@@ -983,15 +1243,26 @@ function Formulario() {
                     <div className="box-select">
 
                         <div className="box-x3">
-                            <TextField id="NomeDependente" label="Nome" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }} />
+                            <TextField
+                                id="NomeDependente"
+                                label="Nome"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }} />
                         </div>
 
                         <div className="box-x1">
-                            <TextField id="NascDependente" type="date" label="Nascimento" variant="outlined" size="small" sx={{
-                                width: '100%'
-                            }}
+                            <TextField
+                                id="NascDependente"
+                                type="date"
+                                label="Nascimento"
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    width: '100%'
+                                }}
                                 InputLabelProps={{
                                     shrink: true,
                                 }} />
@@ -1008,6 +1279,7 @@ function Formulario() {
                                     sx={{ width: '100%' }}
                                     onChange={switchSexoDependente}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Masculino"}>Masculino</MenuItem>
                                     <MenuItem value={"Feminino"}>Feminino</MenuItem>
                                     <MenuItem value={"Outro"}>Outro</MenuItem>
@@ -1026,6 +1298,7 @@ function Formulario() {
                                     sx={{ width: '100%' }}
                                     onChange={switchParentescoDependente}
                                 >
+                                    <MenuItem value={""}><em>None</em></MenuItem>
                                     <MenuItem value={"Cônjuge"}>Cônjuge</MenuItem>
                                     <MenuItem value={"Filho(a)"}>Filho(a)</MenuItem>
                                     <MenuItem value={"Enteado(a)"}>Enteado(a)</MenuItem>
@@ -1036,8 +1309,17 @@ function Formulario() {
                             </FormControl>
                         </div>
 
-                        <div>
-                            <Button variant="outlined" id="BttAddDependente" onClick={AddDependente}>Adicionar</Button>
+                        <div className="box-x1">
+                            <Button
+                                variant="outlined"
+                                id="BttAddDependente"
+                                onClick={AddDependente}
+                                sx={{
+                                    width: '100%'
+                                }}
+                            >
+                                Adicionar
+                            </Button>
                         </div>
 
                     </div>

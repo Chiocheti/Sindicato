@@ -97,8 +97,8 @@ Sindicalista.findByCpf = (SindCpf, result) => {
             return;
         }
         if (res.length) {
-            console.log("Sindicalista encontrado: ", res[0]);
-            result(null, res[0])
+            console.log("Sindicalista encontrado: ", res);
+            result(null, res)
             return
         }
         console.log(`Nenhum Sindicalista com SindCpf: ${SindCpf} encontrado!!!`)
@@ -114,8 +114,8 @@ Sindicalista.findByRg = (SindRg, result) => {
             return;
         }
         if (res.length) {
-            console.log("Sindicalista encontrado: ", res[0]);
-            result(null, res[0])
+            console.log("Sindicalista encontrado: ", res);
+            result(null, res)
             return
         }
         console.log(`Nenhum Sindicalista com SindRg: ${SindRg} encontrado!!!`)
